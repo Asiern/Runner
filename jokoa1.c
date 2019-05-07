@@ -61,7 +61,7 @@ function game(){
 }
 
 function IA(){
-	x=random(min..max) //Variables segun dificultad
+	int x = std::rand() % (max +1 - min) + min;
 	if(time%x=0){}
 		imgpx=imgpx + 1;
 
