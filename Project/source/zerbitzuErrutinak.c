@@ -62,7 +62,7 @@ if (EGOERA!=ZAI)
 
 void etenZerbErrutEzarri()
 {
-// HAU BETE
-	
+	// HAU BETE
+	irqSet(IRQ_KEYS, TeklaZE);
 }
 

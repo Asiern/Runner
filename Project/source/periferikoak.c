@@ -24,24 +24,42 @@ int SakatutakoTekla()
 
 	//Sakatutako teklaren balioa itzultzen du: A=0;B=1;Select=2;Start=3;Esk=4;Ezk=5;
 	//Gora=6;Behera=7;R=8;L=9;
-
-
-	
-
+	int tekla = (~TEKLAK_DAT & 0x03ff);
+        switch (tekla)
+        {       case 1:
+                        return A;
+                case 2:
+                        return B;
+                case 4:
+                        return SELECT;
+                case 8:
+                        return START;
+                case 16:
+                        return ESKUBI;
+                case 32:
+                        return EZKER;
+                case 64:
+                        return GORA;
+                case 128:
+                        return BEHERA;
+                case 256:
+                        return R;
+                case 512:
+                        return L;
+        }
 }
 
 void konfiguratuTeklatua(int TEK_konf)
 {
 	//Teklatuaren konfigurazioa bere S/I erregistroak aldatuz
-	
+	TEKLAK_KNT = TEK_konf;
 }
 
 void konfiguratuTenporizadorea(int Latch, int TENP_konf)
 {
 	//Tenporizadorearen konfigurazioa bere S/I erregistroak aldatuz
-
-	
-	
+	DENBO_DAT = Latch;
+	DENBO_KNT = TENP_konf;
 }
 
 void TekEtenBaimendu()
@@ -50,7 +68,7 @@ void TekEtenBaimendu()
 	//Lan hau burutzeko lehenengo eten guztiak galarazi behar dira eta bukaeran baimendu 
 	IME=0;
 	// HEMEN IDATZI BEHAR DUZUE ZUEN KODEA
-	
+	IE = IE | 0X00001000;
 	IME=1;
 }
 
@@ -61,7 +79,7 @@ void TekEtenGalarazi()
 	//Lan hau burutzeko lehenengo eten guztiak galarazi behar dira eta bukaeran baimendu 
 	IME=0;
 	// HEMEN IDATZI BEHAR DUZUE ZUEN KODEA
-	
+	IE = IE & 0XFFFFEFFF;
 	IME=1;
 }  
 
@@ -72,7 +90,7 @@ void DenbEtenBaimendu()
 //Horretarako lehenengo eten guztiak galarazi eta bukaeran berriro baimendu
 	IME=0;
 	// HEMEN IDATZI BEHAR DUZUE ZUEN KODEA
-	
+	IE = IE | 0X00000008;
 	IME=1;
 }
 
@@ -83,7 +101,7 @@ void DenbEtenGalarazi()
 //Horretarako lehenengo eten guztiak galarazi eta bukaeran berriro baimendu
 	IME=0;
 	// HEMEN IDATZI BEHAR DUZUE ZUEN KODEA
-	
+	IE = IE & 0XFFFFFFF7;
 	IME=1;
 
 }
@@ -91,11 +109,11 @@ void DenbEtenGalarazi()
 void ErlojuaMartxanJarri()
 {
 	// HEMEN IDATZI BEHAR DUZUE ZUEN KODEA
-	
+	DENB0_DAT=
 }
 
 void ErlojuaGelditu()
 {
 	// HEMEN IDATZI BEHAR DUZUE ZUEN KODEA
-	
+	DENB0_DAT=
 }
