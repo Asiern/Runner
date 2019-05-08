@@ -1,10 +1,10 @@
 
 
 function score(){
-	printf(player1.time);
-	printf(player2.time);
-	printf(player3.time);
-	printf(player4.time);
+	printf(time1);
+	printf(time2);
+	printf(time3);
+	printf(time4);
 }
 
 function game(){
@@ -54,7 +54,7 @@ function game(){
 		}
 
 	}
-	x=score();
+	score();
 }
 
 function IA(){
@@ -66,7 +66,7 @@ function IA(){
 			bukatu = True;
 		}
 
-	###########PENDIENTE DE REVISIÓN###########
+	###########PENDIENTE DE REVISIÃ“N###########
 }
 
 
@@ -74,6 +74,7 @@ function IA(){
 function playerelection(){
 	
 	fondo=playerelection.png;
+	detektatu = detektatuplayer()
 	if(detektatu = rango[player1]){
 		player=1;
 		difficulty(player);
@@ -100,7 +101,9 @@ function playerelection(){
 
 function difficulty(player){
 	fondo=difficulty.png;
-	if(detektatu = rango[difficulty1]){
+	detektatu = detektatudifficulty();
+	
+	if(detektatu = 1){
 		min = 20;
 		max = 30;
 		if(player = 1){
@@ -120,7 +123,7 @@ function difficulty(player){
 		}
 	}
 
-	if(detektatu = rango[difficulty2]){
+	if(detektatu = 2){
 		min = 10;
 		max = 20;
 		if(player = 1){
@@ -141,7 +144,7 @@ function difficulty(player){
 	}
 
 	
-	if(detektatu = rango[difficulty3]){
+	if(detektatu =3){
 		min = 5;
 		max = 10;
 		if(player = 1){
@@ -167,6 +170,64 @@ function difficulty(player){
 
 
 
+
+
+
+
+////////////////////////////////////////////// Tactil////////////////////////////////////////////
+
+
+
+
+
+function detektatudifficulty(){
+
+
+
+###########################touchPosition pos_pantaila; // aldagaiaren definizioa
+
+
+
+#########################touchRead(&pos_pantaila);
+if((pos_pantaila.px >= 30 && pos_pantaila.px <= 226) && (pos_pantaila.py >= 30 && pos_pantaila.px <= 70)){
+	return 1;
+
+if((pos_pantaila.px >= 30 && pos_pantaila.px <= 226) && (pos_pantaila.py >= 90 && pos_pantaila.px <= 130)){
+	return 2;
+
+if((pos_pantaila.px >= 30 && pos_pantaila.px <= 226) && (pos_pantaila.py >= 150 && pos_pantaila.px <= 190)){
+	return 3;
+	
+}
+
+}
+
+
+
+
+///////////////////////////////////////////// Time ///////////////////////////////////////////////////
+
+
+suposing 100 hz ()100 ticks/s
+
+
+ErlojuaMartxanJarri();
+while(!stop){
+	
+	tick=tick + 1;
+	
+	if (tick % 
+	= 0){
+		dec = dec + 1;
+	}
+	
+	if (dec = 10){
+		sec = sec + 1;
+		dec = 0;
+	}
+	
+	iprintf("\x1b[22;5H%d : %d",sec, dec);
+}
 
 
 
