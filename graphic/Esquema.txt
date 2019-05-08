@@ -1,10 +1,10 @@
 
 
 function score(){
-	printf(player1.time);
-	printf(player2.time);
-	printf(player3.time);
-	printf(player4.time);
+	printf(time1);
+	printf(time2);
+	printf(time3);
+	printf(time4);
 }
 
 function game(){
@@ -54,7 +54,7 @@ function game(){
 		}
 
 	}
-	x=score();
+	score();
 }
 
 function IA(){
@@ -205,7 +205,29 @@ if((pos_pantaila.px >= 30 && pos_pantaila.px <= 226) && (pos_pantaila.py >= 150 
 
 
 
+///////////////////////////////////////////// Time ///////////////////////////////////////////////////
 
+
+suposing 100 hz ()100 ticks/s
+
+
+ErlojuaMartxanJarri();
+while(!stop){
+	
+	tick=tick + 1;
+	
+	if (tick % 
+	= 0){
+		dec = dec + 1;
+	}
+	
+	if (dec = 10){
+		sec = sec + 1;
+		dec = 0;
+	}
+	
+	iprintf("\x1b[22;5H%d : %d",sec, dec);
+}
 
 
 
