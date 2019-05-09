@@ -109,11 +109,11 @@ void DenbEtenGalarazi()
 void ErlojuaMartxanJarri()
 {
 	// HEMEN IDATZI BEHAR DUZUE ZUEN KODEA
-	DENB0_DAT=
+	DENB0_KNT= DENB0_KNT | 0x0080;
 }
 
 void ErlojuaGelditu()
 {
 	// HEMEN IDATZI BEHAR DUZUE ZUEN KODEA
-	DENB0_DAT=
+	DENB0_KNT = DENB0_KNT & 0xFF7F;
 }
