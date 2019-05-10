@@ -1,4 +1,4 @@
-fondoak.o: /home/user/p1718/source/fondoak.c \
+fondoak.o: /home/user/Desktop/Project/source/fondoak.c \
   /opt/devkitPro/libnds/include/nds.h \
   /opt/devkitPro/libnds/include/nds/libversion.h \
   /opt/devkitPro/libnds/include/nds/ndstypes.h \
@@ -47,8 +47,10 @@ fondoak.o: /home/user/p1718/source/fondoak.c \
   /opt/devkitPro/libnds/include/nds/arm9/sprite.h \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
-  /home/user/p1718/include/fondoak.h /home/user/p1718/include/grafikoak.h \
-  /home/user/p1718/build/Atea.h /home/user/p1718/build/AteaIrekita.h
+  /home/user/Desktop/Project/include/fondoak.h \
+  /home/user/Desktop/Project/include/grafikoak.h \
+  /home/user/Desktop/Project/build/Atea.h \
+  /home/user/Desktop/Project/build/AteaIrekita.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -146,10 +148,10 @@ fondoak.o: /home/user/p1718/source/fondoak.c \
 
 /opt/devkitPro/libnds/include/nds/arm9/decompress.h:
 
-/home/user/p1718/include/fondoak.h:
+/home/user/Desktop/Project/include/fondoak.h:
 
-/home/user/p1718/include/grafikoak.h:
+/home/user/Desktop/Project/include/grafikoak.h:
 
-/home/user/p1718/build/Atea.h:
+/home/user/Desktop/Project/build/Atea.h:
 
-/home/user/p1718/build/AteaIrekita.h:
+/home/user/Desktop/Project/build/AteaIrekita.h:

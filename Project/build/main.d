@@ -1,4 +1,4 @@
-main.o: /home/user/p1718/source/main.c \
+main.o: /home/user/Desktop/Project/source/main.c \
   /opt/devkitPro/libnds/include/nds.h \
   /opt/devkitPro/libnds/include/nds/libversion.h \
   /opt/devkitPro/libnds/include/nds/ndstypes.h \
@@ -47,9 +47,10 @@ main.o: /home/user/p1718/source/main.c \
   /opt/devkitPro/libnds/include/nds/arm9/sprite.h \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
-  /home/user/p1718/include/grafikoak.h \
-  /home/user/p1718/include/definizioak.h \
-  /home/user/p1718/include/spriteak.h /home/user/p1718/include/jokoa01.h
+  /home/user/Desktop/Project/include/grafikoak.h \
+  /home/user/Desktop/Project/include/definizioak.h \
+  /home/user/Desktop/Project/include/spriteak.h \
+  /home/user/Desktop/Project/include/jokoa01.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -147,10 +148,10 @@ main.o: /home/user/p1718/source/main.c \
 
 /opt/devkitPro/libnds/include/nds/arm9/decompress.h:
 
-/home/user/p1718/include/grafikoak.h:
+/home/user/Desktop/Project/include/grafikoak.h:
 
-/home/user/p1718/include/definizioak.h:
+/home/user/Desktop/Project/include/definizioak.h:
 
-/home/user/p1718/include/spriteak.h:
+/home/user/Desktop/Project/include/spriteak.h:
 
-/home/user/p1718/include/jokoa01.h:
+/home/user/Desktop/Project/include/jokoa01.h:

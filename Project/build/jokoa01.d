@@ -1,4 +1,4 @@
-jokoa01.o: /home/user/p1718/source/jokoa01.c \
+jokoa01.o: /home/user/Desktop/Project/source/jokoa01.c \
   /opt/devkitPro/libnds/include/nds.h \
   /opt/devkitPro/libnds/include/nds/libversion.h \
   /opt/devkitPro/libnds/include/nds/ndstypes.h \
@@ -47,10 +47,10 @@ jokoa01.o: /home/user/p1718/source/jokoa01.c \
   /opt/devkitPro/libnds/include/nds/arm9/sprite.h \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
-  /home/user/p1718/include/definizioak.h \
-  /home/user/p1718/include/periferikoak.h \
-  /home/user/p1718/include/zerbitzuErrutinak.h \
-  /home/user/p1718/include/fondoak.h
+  /home/user/Desktop/Project/include/definizioak.h \
+  /home/user/Desktop/Project/include/periferikoak.h \
+  /home/user/Desktop/Project/include/zerbitzuErrutinak.h \
+  /home/user/Desktop/Project/include/fondoak.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -148,10 +148,10 @@ jokoa01.o: /home/user/p1718/source/jokoa01.c \
 
 /opt/devkitPro/libnds/include/nds/arm9/decompress.h:
 
-/home/user/p1718/include/definizioak.h:
+/home/user/Desktop/Project/include/definizioak.h:
 
-/home/user/p1718/include/periferikoak.h:
+/home/user/Desktop/Project/include/periferikoak.h:
 
-/home/user/p1718/include/zerbitzuErrutinak.h:
+/home/user/Desktop/Project/include/zerbitzuErrutinak.h:
 
-/home/user/p1718/include/fondoak.h:
+/home/user/Desktop/Project/include/fondoak.h:
