@@ -1,6 +1,19 @@
 configurar timer (latch...)
 
-jokalariak() bordes botones en pixeles
+jokalariak() bordes botones en pixeles{
+	player1: eje x --> 18 px - 110 px
+		 eje y --> 108 px - 129 px
+		 
+	player2: eje x --> 143 px - 235 px
+		 eje y --> 108 px - 129 px
+		 
+	player3: eje x --> 18 px - 110 px
+		 eje y --> 144 px - 165 px
+		 
+	player4: eje x --> 143 px - 235 px
+		 eje y --> 144 px - 165 px
+
+}
 
 zailtasuna() bordes botones en pixeles
 
