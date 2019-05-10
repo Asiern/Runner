@@ -15,7 +15,16 @@ jokalariak() bordes botones en pixeles{
 
 }
 
-zailtasuna() bordes botones en pixeles
+zailtasuna() bordes botones en pixeles{
+	difficulty1: eje x --> 47 px - 209 px
+		     eje y --> 90 px - 111 px
+		 
+	difficulty2: eje x --> 47 px - 209 px
+		     eje y --> 124 px - 145 px
+		 
+	difficulty3: eje x --> 47 px - 209 px
+		     eje y --> 158 px - 179 px
+}
 
 jokoa() revision fallos (duda de funcionamiento en //helmuga), bloquear movimiento, bloquear temporizador individual
 
