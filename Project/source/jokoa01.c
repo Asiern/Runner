@@ -32,12 +32,9 @@ void jokoa01()
 	touchPosition pos_pantaila; //aldagaiaren definizioa
 	touchRead(&pos_pantaila); //posizioaren irakurketa
 
-
-
-	/*erakutsiAtea();
-	ErakutsiErronboa (1,12,12);
-        int x = 12;
-        int y =12;*/
+	//config
+	konfiguratuTeklatua(int TEK_konf);
+	konfiguratuTenporizadorea(Latch,TENP_konf);
 
 
 	while(1){
@@ -144,6 +141,8 @@ void jokoa01()
 		int posj2 = 10; //spritearen x posizioa (y posizioa ez da aldatzen)
 		int posj3 = 10; //spritearen x posizioa (y posizioa ez da aldatzen)
 		int posj4 = 10; //spritearen x posizioa (y posizioa ez da aldatzen)
+		int helmuga = 200; // helmugaren x posizioa
+		int time; //denboragailua
 
 		bool bukatua = false; //lau jokalariak helmugara iristean true bihurtuko da
 
@@ -171,9 +170,29 @@ void jokoa01()
 			if (j4 = 0){
 				mugitu(4,posj2,y); //IA-ko mugimendua
 			}
+
+			//Helmuga
+			if (posj1 = helmuga || posj2 = helmuga || posj3 = helmuga || posj4 = helmuga)
+			{
+				//norbaitek bukatu du
+				switch (helmuga){
+					case posj1:
+						iprintf("\x1b[23;5HJ1 ===> %ds ", time); //Helmugara iristen denean pantailaratu denbora
+						//lock movement
+					case posj2:
+						iprintf("\x1b[23;5HJ2 ===> %ds ", time); //Helmugara iristen denean pantailaratu denbora
+						//lock movement
+					case posj3:
+						iprintf("\x1b[23;5HJ3 ===> %ds ", time); //Helmugara iristen denean pantailaratu denbora
+						//lock movement
+					case posj4:
+						iprintf("\x1b[23;5HJ4 ===> %ds ", time); //Helmugara iristen denean pantailaratu denbora
+						//lock movement
+				}
+			}
 		}
 
-
+		EGOERA = MARK; //hurrengo egoerara joan
 	}
 
 	void mugitu(int jokalari, int posx){
