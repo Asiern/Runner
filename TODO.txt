@@ -1,0 +1,32 @@
+configurar timer (latch...)
+
+jokalariak() bordes botones en pixeles
+
+zailtasuna() bordes botones en pixeles
+
+jokoa() revision fallos (duda de funcionamiento en //helmuga), bloquear movimiento, bloquear temporizador individual
+
+mugitu() revision fallos
+
+cheats() hacerlo
+
+mark() hacerlo
+
+timer() hacerlo
+
+crear variables globales para:
+	
+	posicion jugadores y/x
+	activacion jugadores
+
+-----------------------------------------------------
+
+Sprites
+	configurar paleta de colores
+	crear ErakutsiPepe(){}
+	crear EzabatuPepe(){}
+
+Hacer fondos y pasarlos a .png de paint
+
+
+
