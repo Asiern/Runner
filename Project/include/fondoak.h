@@ -4,4 +4,5 @@ fondoak.h
 
 extern void erakutsiAtea();
 extern void erakutsiAteaIrekita();
-extern void erakutsimain();
+extern void erakutsijokalariak();
+extern void erakutsizailtasuna();

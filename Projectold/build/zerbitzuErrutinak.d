@@ -1,4 +1,5 @@
-zerbitzuErrutinak.o: /home/user/p1718/source/zerbitzuErrutinak.c \
+zerbitzuErrutinak.o:  \
+ /home/user/Desktop/Project/source/zerbitzuErrutinak.c \
   /opt/devkitPro/libnds/include/nds.h \
   /opt/devkitPro/libnds/include/nds/libversion.h \
   /opt/devkitPro/libnds/include/nds/ndstypes.h \
@@ -47,9 +48,10 @@ zerbitzuErrutinak.o: /home/user/p1718/source/zerbitzuErrutinak.c \
   /opt/devkitPro/libnds/include/nds/arm9/sprite.h \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
-  /home/user/p1718/include/definizioak.h \
-  /home/user/p1718/include/periferikoak.h \
-  /home/user/p1718/include/fondoak.h /home/user/p1718/include/spriteak.h
+  /home/user/Desktop/Project/include/definizioak.h \
+  /home/user/Desktop/Project/include/periferikoak.h \
+  /home/user/Desktop/Project/include/fondoak.h \
+  /home/user/Desktop/Project/include/spriteak.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -147,10 +149,10 @@ zerbitzuErrutinak.o: /home/user/p1718/source/zerbitzuErrutinak.c \
 
 /opt/devkitPro/libnds/include/nds/arm9/decompress.h:
 
-/home/user/p1718/include/definizioak.h:
+/home/user/Desktop/Project/include/definizioak.h:
 
-/home/user/p1718/include/periferikoak.h:
+/home/user/Desktop/Project/include/periferikoak.h:
 
-/home/user/p1718/include/fondoak.h:
+/home/user/Desktop/Project/include/fondoak.h:
 
-/home/user/p1718/include/spriteak.h:
+/home/user/Desktop/Project/include/spriteak.h:

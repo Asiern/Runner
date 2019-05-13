@@ -1,25 +1,25 @@
 
-//{{BLOCK(Atea)
+//{{BLOCK(zailtasuna)
 
 //======================================================================
 //
-//	Atea, 256x192@16, 
+//	zailtasuna, 256x192@16, 
 //	Alphabit on.
 //	+ bitmap not compressed
 //	Total size: 98304 = 98304
 //
-//	Time-stamp: 2019-05-09, 06:58:07
+//	Time-stamp: 2019-05-13, 04:20:45
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
 //======================================================================
 
-#ifndef GRIT_ATEA_H
-#define GRIT_ATEA_H
+#ifndef GRIT_ZAILTASUNA_H
+#define GRIT_ZAILTASUNA_H
 
-#define AteaBitmapLen 98304
-extern const unsigned int AteaBitmap[24576];
+#define zailtasunaBitmapLen 98304
+extern const unsigned int zailtasunaBitmap[24576];
 
-#endif // GRIT_ATEA_H
+#endif // GRIT_ZAILTASUNA_H
 
-//}}BLOCK(Atea)
+//}}BLOCK(zailtasuna)

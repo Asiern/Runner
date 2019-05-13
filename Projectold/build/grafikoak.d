@@ -1,4 +1,4 @@
-grafikoak.o: /home/user/p1718/source/grafikoak.c \
+grafikoak.o: /home/user/Desktop/Project/source/grafikoak.c \
   /opt/devkitPro/libnds/include/nds.h \
   /opt/devkitPro/libnds/include/nds/libversion.h \
   /opt/devkitPro/libnds/include/nds/ndstypes.h \
@@ -47,8 +47,8 @@ grafikoak.o: /home/user/p1718/source/grafikoak.c \
   /opt/devkitPro/libnds/include/nds/arm9/sprite.h \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
-  /home/user/p1718/include/grafikoak.h \
-  /home/user/p1718/include/spriteak.h
+  /home/user/Desktop/Project/include/grafikoak.h \
+  /home/user/Desktop/Project/include/spriteak.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -146,6 +146,6 @@ grafikoak.o: /home/user/p1718/source/grafikoak.c \
 
 /opt/devkitPro/libnds/include/nds/arm9/decompress.h:
 
-/home/user/p1718/include/grafikoak.h:
+/home/user/Desktop/Project/include/grafikoak.h:
 
-/home/user/p1718/include/spriteak.h:
+/home/user/Desktop/Project/include/spriteak.h:

@@ -1,0 +1,1 @@
+zailtasuna.o: zailtasuna.s

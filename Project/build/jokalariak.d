@@ -1,0 +1,1 @@
+jokalariak.o: jokalariak.s

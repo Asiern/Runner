@@ -1,6 +1,6 @@
 configurar timer (latch...)
 
-jokalariak() bordes botones en pixeles{
+jokalariak() bordes botones en pixeles{  //funciona con teclas, hay que pasarlo a tactil
 	player1: eje x --> 18 px - 110 px
 		 eje y --> 108 px - 129 px
 		 
@@ -15,7 +15,7 @@ jokalariak() bordes botones en pixeles{
 
 }
 
-zailtasuna() bordes botones en pixeles{
+zailtasuna() bordes botones en pixeles{  //funciona con teclas, hay que pasarlo a tactil
 	difficulty1: eje x --> 47 px - 209 px
 		     eje y --> 90 px - 111 px
 		 
@@ -48,7 +48,7 @@ Sprites
 	crear ErakutsiPepe(){}
 	crear EzabatuPepe(){}
 
-Hacer fondos y pasarlos a .png de paint
+Hacer fondos marcadores, pusa y cheats.
 
 
 

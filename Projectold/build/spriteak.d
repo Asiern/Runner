@@ -1,4 +1,4 @@
-spriteak.o: /home/user/p1718/source/spriteak.c \
+spriteak.o: /home/user/Desktop/Project/source/spriteak.c \
   /opt/devkitPro/libnds/include/nds.h \
   /opt/devkitPro/libnds/include/nds/libversion.h \
   /opt/devkitPro/libnds/include/nds/ndstypes.h \
@@ -47,8 +47,8 @@ spriteak.o: /home/user/p1718/source/spriteak.c \
   /opt/devkitPro/libnds/include/nds/arm9/sprite.h \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
-  /home/user/p1718/include/spriteak.h \
-  /home/user/p1718/include/definizioak.h
+  /home/user/Desktop/Project/include/spriteak.h \
+  /home/user/Desktop/Project/include/definizioak.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -146,6 +146,6 @@ spriteak.o: /home/user/p1718/source/spriteak.c \
 
 /opt/devkitPro/libnds/include/nds/arm9/decompress.h:
 
-/home/user/p1718/include/spriteak.h:
+/home/user/Desktop/Project/include/spriteak.h:
 
-/home/user/p1718/include/definizioak.h:
+/home/user/Desktop/Project/include/definizioak.h:

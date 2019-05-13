@@ -58,8 +58,8 @@ void konfiguratuTeklatua(int TEK_konf)
 void konfiguratuTenporizadorea(int Latch, int TENP_konf)
 {
 	//Tenporizadorearen konfigurazioa bere S/I erregistroak aldatuz
-	DENBO_DAT = Latch;
-	DENBO_KNT = TENP_konf;
+	DENB0_DAT = Latch;
+	DENB0_KNT = TENP_konf;
 }
 
 void TekEtenBaimendu()
