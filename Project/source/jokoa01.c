@@ -24,11 +24,7 @@ void jokoa01()
 	int jkop = 1;
 
 	EGOERA = ZAI;
-
-	//EGOERA=JOKALARIAK; //Egoera orain jokalari kopuruaren aukeraketa da.
-
-	touchPosition pos_pantaila; //aldagaiaren definizioa
-	touchRead(&pos_pantaila); //posizioaren irakurketa
+	
 
 	//config
 	//konfiguratuTeklatua(int TEK_konf);
@@ -38,43 +34,92 @@ void jokoa01()
 
 	//Methods
 
-	void jokalariak () {
+	void jokalariak () {		 
+
 		erakutsijokalariak();
-		while (TeklaDetektatu() == 0){
-			iprintf("\x1b[23;5HAukeratu jakalari kopurua");	//Fix Height
-			//Implementar tactil con 4 if(){}
-			//...
+		while (PANT_DAT.px == 0 && PANT_DAT.py == 0){
+			touchRead(&PANT_DAT); //posizioaren irakurketa
 		}
-		status = 1; // Zailtasun egoera
+		
+		iprintf("\x1b[23;5HAukeratu jakalari kopurua");	//Fix Height
+
+		//1 jokalari
+		if((PANT_DAT.px >= 18 && PANT_DAT.px <= 110) && (PANT_DAT.py >= 108 && PANT_DAT.py <= 129)){
+			int jkop=1;
+			status = 1; // Zailtasun egoera
+		}
+
+		//2 jokalari
+		if((PANT_DAT.px >= 143 && PANT_DAT.px <= 235) && (PANT_DAT.py >= 108 && PANT_DAT.py <= 129)){
+			int jkop=2;
+			status = 1; // Zailtasun egoera
+		}
+			
+		//3 jokalari
+		if((PANT_DAT.px >= 18 && PANT_DAT.px <= 110) && (PANT_DAT.py >= 150 && PANT_DAT.py <= 190)){
+			int jkop=3;
+			status = 1; // Zailtasun egoera
+		}
+			
+		//4 jokalari
+		if((PANT_DAT.px >= 143 && PANT_DAT.px <= 235) && (PANT_DAT.py >= 150 && PANT_DAT.py <= 190)){
+			int jkop=4;
+			status = 1; // Zailtasun egoera
+		}
+
+		PANT_DAT.px == 0;
+		PANT_DAT.py == 0;
 	
 	}
 
 	void zailtasuna () {
+
 		erakutsizailtasuna();
-		while (TeklaDetektatu() == 0){
-			iprintf("\x1b[23;5HAukeratu zailtasuna"); //Fix Height
-			//Implementar tactil con 3 if(){}
-			//...
+		while (PANT_DAT.px == 0 && PANT_DAT.py == 0){
+			touchRead(&PANT_DAT);
 		}
-		status = 2; // Zailtasun egoera
+			
+		iprintf("\x1b[23;5HAukeratu zailtasuna"); //Fix Height
+			
+		//Erraza
+		if((PANT_DAT.px >= 47 && PANT_DAT.px <= 209) && (PANT_DAT.py >= 90 && PANT_DAT.py <= 111)){
+			int zailt=1;
+			status = 2; // Jokoa egoera
+		}
+
+		//Normala
+		if((PANT_DAT.px >= 47 && PANT_DAT.px <= 209) && (PANT_DAT.py >= 124 && PANT_DAT.py <= 145)){
+			int zailt=2;
+			status = 2; // Jokoa egoera
+		}
+			
+		//Zaila
+		if((PANT_DAT.px >= 47 && PANT_DAT.px <= 209) && (PANT_DAT.py >= 158 && PANT_DAT.py <= 179)){
+			int zailt=3;
+			status = 2; // Jokoa egoera
+		}
+
+		status = 2; // Jokoa egoera
 	
 	}
 
 	void jokoa () {
+		//Fix Height
 		int finish = 0;
 		int x = 5;
 		erakutsiAtea();
 		//load sprites
 		ErakutsiErronboHandia(1,5,40);
-		while (finish == 0){
-			if(TeklaDetektatu == 1){
+		iprintf("\x1b[12;5HRUNNER %d",jkop);
+		while (1){
+			if(TeklaDetektatu() == 1){
 				EzabatuErronboHandia(1,x,40);
-				ErakutsiErronboHandia(1,x+10,40);
-				x = x+10;
+				ErakutsiErronboHandia(1,x+1,40);
+				x = x+1;
 			}
 		}
-		status = 3; // Zailtasun egoera
-	
+		//status = 3; // Mark egoera
+		
 	}
 
 	void mark () {
@@ -84,7 +129,7 @@ void jokoa01()
 			//Implementar marcadores
 			//...
 		}
-		status = 0; // Zailtasun egoera
+		status = 0; // Jokalari egoera
 	
 	}
 
