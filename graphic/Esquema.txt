@@ -1,3 +1,8 @@
+********DENB0_DAT(edo latch)=65208,32  ****Latch honekin 100 eten segunduko egingo ditu.
+********DENB0_KNT=0x00C3
+
+
+
 
 
 function score(){
@@ -231,12 +236,18 @@ while(!stop){
 
 
 
+			**********POSTUA GORDETZEKO IDEIA**********
 
+*******PLAYER BAKOITZAREN BARRUAN
+***Demagun "postua" variablea sortuta dagoela, eta 1 balioa du hasiera batean => int postua = 1;
 
-
-
-
-
+if (imgpx x = meta){
+			bukatux = True;
+			xjokalaripostua=postua;
+			postua=postua+1;
+		}
+		
+*******Orain, jokua amaitzean score pantailan xjokalaripostua variablea erabiltzea besterik ez da falta, hura pantailaratuz(print).
 
 
 
