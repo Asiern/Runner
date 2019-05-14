@@ -22,23 +22,58 @@ void jokoa01()
 {	
 	int tekla=0;
 	int jkop = 1;
+	int segundua = 0;
 
 	EGOERA = ZAI;
 	
 
 	//config
 	//konfiguratuTeklatua(int TEK_konf);
-	//konfiguratuTenporizadorea(Latch,TENP_konf);
-
+	konfiguratuTenporizadorea(65208.32,0x00C3);
+	
 
 
 	//Methods
+	void delay (int x){ //delay = x ms
+		int time = 0;
 
-	void jokalariak () {		 
+		ErlojuaMartxanJarri();
+		while (x > time){
+			time++;
+			//iprintf("\x1b[23;5HTIME: %d",time);
+		}
+		ErlojuaGelditu();
+	}
 
+	void temp (){
+		int stop = 0;
+		int tick = 0;
+		int dec = 0;
+		int sec = 0;
+		ErlojuaMartxanJarri();
+		while(stop == 0){
+	
+			tick = tick + 1;
+	
+			if (tick % 100 == 0){
+				dec = dec + 1;
+			}
+	
+			if (dec == 10){
+				sec = sec + 1;
+				dec = 0;
+			}
+	
+			iprintf("\x1b[22;5H%d : %d",sec, dec);
+		}
+	}
+			
+
+	void jokalariak () {	
 		erakutsijokalariak();
 		while (PANT_DAT.px == 0 && PANT_DAT.py == 0){
 			touchRead(&PANT_DAT); //posizioaren irakurketa
+			
 		}
 		
 		iprintf("\x1b[23;5HAukeratu jakalari kopurua");	//Fix Height
@@ -67,16 +102,18 @@ void jokoa01()
 			status = 1; // Zailtasun egoera
 		}
 
-		PANT_DAT.px == 0;
-		PANT_DAT.py == 0;
+		//PANT_DAT.px == 0;
+		//PANT_DAT.py == 0;
 	
 	}
 
 	void zailtasuna () {
-
+		//delay(10000);
 		erakutsizailtasuna();
+		
 		while (PANT_DAT.px == 0 && PANT_DAT.py == 0){
 			touchRead(&PANT_DAT);
+			iprintf("\x1b[12;5HAAAAAAAAAAAAAAAAAAA");	//Fix Height
 		}
 			
 		iprintf("\x1b[23;5HAukeratu zailtasuna"); //Fix Height
@@ -98,20 +135,17 @@ void jokoa01()
 			int zailt=3;
 			status = 2; // Jokoa egoera
 		}
-
-		status = 2; // Jokoa egoera
 	
 	}
 
 	void jokoa () {
-		//Fix Height
 		int finish = 0;
 		int x = 5;
 		erakutsiAtea();
 		//load sprites
 		ErakutsiErronboHandia(1,5,40);
 		iprintf("\x1b[12;5HRUNNER %d",jkop);
-		while (1){
+		while (finish == 0){
 			if(TeklaDetektatu() == 1){
 				EzabatuErronboHandia(1,x,40);
 				ErakutsiErronboHandia(1,x+1,40);
@@ -152,7 +186,10 @@ void jokoa01()
 				break;
 			case 4:
 				iprintf("\x1b[23;5HAldagai proba. Balioa= 4");
-				break;			
+				break;	
+			case 9: //tests
+				temp();
+				break;		
 		}
 	 }
 
