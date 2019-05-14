@@ -16,13 +16,15 @@ adibide batean oinarrituta.
 #include "fondoak.h"
 
 int denb;
-int status = 0; //0 jokalariak, 1 zailtasuna, 2 jokoa, 3 mark, 4 cheats, 5 pause
+int status = 2; //0 jokalariak, 1 zailtasuna, 2 jokoa, 3 mark, 4 cheats, 5 pause
 
 void jokoa01()
 {	
 	int tekla=0;
 	int jkop = 1;
-	int segundua = 0;
+	int segundua = 0;	
+	ErlojuaMartxanJarri();
+	konfiguratuTeklatua(0x400C);
 
 	EGOERA = ZAI;
 	
@@ -40,7 +42,7 @@ void jokoa01()
 		ErlojuaMartxanJarri();
 		while (x > time){
 			time++;
-			//iprintf("\x1b[23;5HTIME: %d",time);
+			iprintf("\x1b[23;5HTIME: %d",time);
 		}
 		ErlojuaGelditu();
 	}
@@ -50,12 +52,11 @@ void jokoa01()
 		int tick = 0;
 		int dec = 0;
 		int sec = 0;
-		ErlojuaMartxanJarri();
 		while(stop == 0){
 	
 			tick = tick + 1;
 	
-			if (tick % 100 == 0){
+			if (tick % 800 == 0){
 				dec = dec + 1;
 			}
 	
@@ -108,9 +109,10 @@ void jokoa01()
 	}
 
 	void zailtasuna () {
-		//delay(10000);
+		delay(10000);
 		erakutsizailtasuna();
-		
+		PANT_DAT.px = 0;
+		PANT_DAT.py = 0;
 		while (PANT_DAT.px == 0 && PANT_DAT.py == 0){
 			touchRead(&PANT_DAT);
 			iprintf("\x1b[12;5HAAAAAAAAAAAAAAAAAAA");	//Fix Height
@@ -140,29 +142,47 @@ void jokoa01()
 
 	void jokoa () {
 		int finish = 0;
+		int push = 1;
 		int x = 5;
 		erakutsiAtea();
 		//load sprites
 		ErakutsiErronboHandia(1,5,40);
 		iprintf("\x1b[12;5HRUNNER %d",jkop);
 		while (finish == 0){
-			if(TeklaDetektatu() == 1){
-				EzabatuErronboHandia(1,x,40);
-				ErakutsiErronboHandia(1,x+1,40);
-				x = x+1;
+
+			if(TeklaDetektatu() == push){
+				if (push == 1){
+					EzabatuErronboHandia(1,x,40);
+					ErakutsiErronboHandia(1,x+1,40);
+					x = x+5;
+					delay(100);
+					push = 0;
+					if (x >= 220)					
+					{
+						iprintf("\x1b[10;5HPOS: %d",x);
+						EzabatuErronboHandia(1,x,40);
+						finish = 1;
+						
+					}
+				}
+				else
+				{
+					push = 1;
+				}
+				
 			}
 		}
-		//status = 3; // Mark egoera
+		status = 3; // Mark egoera
 		
 	}
 
 	void mark () {
-		erakutsizailtasuna();
+		/*erakutsizailtasuna();
 		while (TeklaDetektatu() == 0){
 			iprintf("\x1b[23;5HRUNNER"); //Fix Height
 			//Implementar marcadores
 			//...
-		}
+		}*/
 		status = 0; // Jokalari egoera
 	
 	}
@@ -187,6 +207,9 @@ void jokoa01()
 			case 4:
 				iprintf("\x1b[23;5HAldagai proba. Balioa= 4");
 				break;	
+			case 5: 
+				iprintf("\x1b[23;5HPAUSE");
+				break;
 			case 9: //tests
 				temp();
 				break;		

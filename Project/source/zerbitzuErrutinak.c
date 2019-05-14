@@ -13,19 +13,18 @@ int EGOERA;
 int seg3;
 
 void tekEten ()
-{
-if (EGOERA == ITXITA)
 {	
-	if (SakatutakoTekla()==A)
-	{
-		EGOERA=IREKITA;
-		iprintf("\x1b[13;5HPasa diren segunduak=0");
+	int stop = 0;
+	if (SakatutakoTekla()== START)
+	{	
 		erakutsiAteaIrekita();
-		seg3=0;
-		ErakutsiErronboa(1, 5, 5);
-		ErakutsiErronboHandia(2, 100, 100);
+		while (stop == 0){
+			if(SakatutakoTekla() == A){
+				stop = 1;
+			}
+		}			
+
 	}
-}
 }
 
 void tenpEten()
