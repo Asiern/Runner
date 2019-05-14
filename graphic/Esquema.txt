@@ -245,6 +245,7 @@ if (imgpx x = meta){
 			bukatux = True;
 			xjokalaripostua=postua;
 			postua=postua+1;
+			xjokalaridenbo=denbora;
 		}
 		
 *******Orain, jokua amaitzean score pantailan xjokalaripostua variablea erabiltzea besterik ez da falta, hura pantailaratuz(print).
