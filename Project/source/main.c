@@ -21,7 +21,7 @@ int main(void) {
 //---------------------------------------------------------------------------------
 
 	HasieratuGrafikoakSpriteak();
-	EtenakBaimendu();
+	//EtenakBaimendu();
 
 	//Zuen jokoari dei egingo zaio hemendik
 	jokoa01();

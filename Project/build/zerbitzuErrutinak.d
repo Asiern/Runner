@@ -48,6 +48,7 @@ zerbitzuErrutinak.o:  \
   /opt/devkitPro/libnds/include/nds/arm9/sprite.h \
   /opt/devkitPro/libnds/include/nds/system.h \
   /opt/devkitPro/libnds/include/nds/arm9/decompress.h \
+  /home/user/Desktop/Project/include/jokoa01.h \
   /home/user/Desktop/Project/include/definizioak.h \
   /home/user/Desktop/Project/include/periferikoak.h \
   /home/user/Desktop/Project/include/fondoak.h \
@@ -148,6 +149,8 @@ zerbitzuErrutinak.o:  \
 /opt/devkitPro/libnds/include/nds/system.h:
 
 /opt/devkitPro/libnds/include/nds/arm9/decompress.h:
+
+/home/user/Desktop/Project/include/jokoa01.h:
 
 /home/user/Desktop/Project/include/definizioak.h:
 

@@ -24,7 +24,7 @@ int SakatutakoTekla()
 
 	//Sakatutako teklaren balioa itzultzen du: A=0;B=1;Select=2;Start=3;Esk=4;Ezk=5;
 	//Gora=6;Behera=7;R=8;L=9;
-	int tekla = (~TEKLAK_DAT & 0x03ff);
+	int tekla = (~TEKLAK_DAT & 0x03FF);
         switch (tekla)
         {       case 1:
                         return A;

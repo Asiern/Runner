@@ -16,22 +16,28 @@ adibide batean oinarrituta.
 #include "fondoak.h"
 
 int denb;
-int status = 0; //0 jokalariak, 1 zailtasuna, 2 jokoa, 3 mark, 4 cheats, 5 pause
+int status = 0; //0 jokalariak, 1 zailtasuna, 2 jokoa, 3 mark, 4 cheats
 
 void jokoa01()
 {	
 	int tekla=0;
 	int jkop = 1;
 	int zailt = 1; //1 erraza, 2 normala, 3 zaila
-	int segundua = 0;	
+	int segundua = 0;
+	
+	TekEtenBaimendu();
 	ErlojuaMartxanJarri();
+    	etenZerbErrutEzarri();
+    	DenbEtenBaimendu();
+    	tenpZerbErrutEzarri();
+	
 
 	EGOERA = ZAI;
 	
 
 	//config	
 	konfiguratuTeklatua(0x400C);
-	konfiguratuTenporizadorea(65208.32,0x00C3);
+	konfiguratuTenporizadorea(65208,0x00C3);
 	
 
 
@@ -42,10 +48,25 @@ void jokoa01()
 		ErlojuaMartxanJarri();
 		while (x > time){
 			time++;
-			iprintf("\x1b[23;5HTIME: %d",time);
+			//iprintf("\x1b[23;5HTIME: %d",time);
 		}
 		ErlojuaGelditu();
 	}
+
+
+	void prueba(){
+		static int tik=0;
+		static int seg=0;
+		tik++; 
+		if (tik==100)
+		{
+			seg++;
+			iprintf("\x1b[1;5HPasa diren segunduak=%d", seg);
+			tik=0;		
+				
+		}	
+	}	
+
 
 	void temp (){
 		int stop = 0;
@@ -73,13 +94,14 @@ void jokoa01()
 	int jokalariak () {	
 
 		erakutsijokalariak();
+		PANT_DAT.px = 0;
+		PANT_DAT.py = 0;
+		iprintf("\x1b[23;5HAukeratu jakalari kopurua");	//Fix Height
 
 		while (PANT_DAT.px == 0 && PANT_DAT.py == 0){
-			touchRead(&PANT_DAT); //posizioaren irakurketa
-			
-		}
+			touchRead(&PANT_DAT); //posizioaren irakurketa			
+		}		
 		
-		iprintf("\x1b[23;5HAukeratu jakalari kopurua");	//Fix Height
 
 		//1 jokalari
 		if((PANT_DAT.px >= 18 && PANT_DAT.px <= 110) && (PANT_DAT.py >= 108 && PANT_DAT.py <= 129)){
@@ -112,12 +134,12 @@ void jokoa01()
 		PANT_DAT.px = 0;
 		PANT_DAT.py = 0;
 
+		iprintf("\x1b[23;5HAukeratu zailtasuna"); //Fix Height
+
 		while (PANT_DAT.px == 0 && PANT_DAT.py == 0){
 			touchRead(&PANT_DAT);
-			iprintf("\x1b[12;5HAAAAAAAAAAAAAAAAAAA");	//Fix Height
 		}
 			
-		iprintf("\x1b[23;5HAukeratu zailtasuna"); //Fix Height
 			
 		//Erraza
 		if((PANT_DAT.px >= 47 && PANT_DAT.px <= 209) && (PANT_DAT.py >= 90 && PANT_DAT.py <= 111)){
@@ -137,14 +159,13 @@ void jokoa01()
 			return 3;
 			
 		}
-	
 	}
 
 	void jokoa () {
-		int finish = 0;
-		int push = 1;
+		int pushA = 1;
 		int pushB = 1;
-		int x = 5;
+		int pushGORA = 1;
+		int pushBEHERA =1;
 		
 		//J1
 		int j1 = 0; //finished(1) or not(0)
@@ -167,32 +188,33 @@ void jokoa01()
 		static int j4y = 124; //y pos of j4
 
 		erakutsiAtea();
+
 		//load sprites
 		Erakutsisonic(1,j1x,j1y);
 		Erakutsisonic(2,j2x,j2y);
 		Erakutsisonic(3,j3x,j3y);
 		Erakutsisonic(4,j4x,j4y);
 
-		while (j1 == 0 && j2 == 0 && j3 == 0 && j4 == 0) {
-
+		while (j1 == 0 || j2 == 0 || j3 == 0 || j4 == 0) {
+			
 			if(SakatutakoTekla() == A){
-                		if(TeklaDetektatu() == push){
-                    			if (push == 1){
-                        			EzabatuErronboHandia(1,x,40);
-                        			ErakutsiErronboHandia(1,x+1,40);
-                        			x = x+5;
-                       	 			push = 0;
-                        			if (x >= 220)					
+                		if(TeklaDetektatu() == pushA){
+                    			if (pushA == 1){
+                        			EzabatuErronboHandia(1,j1x,40);
+                        			ErakutsiErronboHandia(1,j1x+1,40);
+                        			j1x = j1x+5;
+                       	 			pushA = 0;
+                        			if (j1x >= 220)					
                         			{
-                            				iprintf("\x1b[10;5HPOS: %d",x);
-                            				EzabatuErronboHandia(1,x,40);
-                            				finish = 1;
+                            				iprintf("\x1b[10;5HPOS: %d",j1x);
+                            				EzabatuErronboHandia(1,j1x,40);
+                            				j1 = 1;
                             	
                         			}
                     			}
                     			else
                     			{
-                       				push = 1;
+                       				pushA = 1;
                     			}
                     	
           		      	}	
@@ -234,12 +256,12 @@ void jokoa01()
 			else {
 
 				if(SakatutakoTekla() == GORA){
-	         			if(TeklaDetektatu() == pushB){
-	                    			if (pushB == 1){
+	         			if(TeklaDetektatu() == pushGORA){
+	                    			if (pushGORA == 1){
 	                        			Ezabatusonic(3,j3x,j3y);
 	                        			Erakutsisonic(3,j3x+1,j3y);
 	                        			j3x = j3x+5;
-	                        			pushB = 0;
+	                        			pushGORA = 0;
 	                        			if (j3x >= 220)					
 	                        			{
 	                            				//Ezabatusonic(3,j3x,j3y);
@@ -248,7 +270,7 @@ void jokoa01()
 	                    			}
 	                    			else
 	                    			{
-	                        			pushB = 1;
+	                        			pushGORA = 1;
 	                    			}
 	                    
 	                		}
@@ -263,12 +285,12 @@ void jokoa01()
 			else {
 
 				if(SakatutakoTekla() == BEHERA){
-	         			if(TeklaDetektatu() == pushB){
-	                    			if (pushB == 1){
+	         			if(TeklaDetektatu() == pushBEHERA){
+	                    			if (pushBEHERA == 1){
 	                        			Ezabatusonic(4,j4x,j4y);
 	                        			Erakutsisonic(4,j4x+1,j4y);
 	                        			j4x = j4x+5;
-	                        			pushB = 0;
+	                        			pushBEHERA = 0;
 	                        			if (j4x >= 220)					
 	                        			{
 	                            				//Ezabatusonic(4,j4x,80);
@@ -277,12 +299,13 @@ void jokoa01()
 	                    			}
 	                    			else
 	                    			{
-	                      		  		pushB = 1;
+	                      		  		pushBEHERA = 1;
 	                    			}
 	                    
 	                		}
 	    			}
 			}
+			
 		}
 		
 		status = 3; // Mark egoera
@@ -290,12 +313,18 @@ void jokoa01()
 	}
 
 	void mark () {
-		/*erakutsizailtasuna();
+		//erakutsizailtasuna();
+		iprintf("\x1b[5;7HRUNNER"); //Fix Height
+		int sec = 21;
+		int dec = 13;
+		iprintf("\x1b[10;7HJ1 -> %d s %d ms",sec,dec);
+		iprintf("\x1b[12;7HJ2 -> %d s %d ms",sec,dec);
+		iprintf("\x1b[14;7HJ3 -> %d s %d ms",sec,dec);
+		iprintf("\x1b[16;7HJ4 -> %d s %d ms",sec,dec);
+		iprintf("\x1b[20;2HSakatu tekla bat jarraitzeko");
 		while (TeklaDetektatu() == 0){
-			iprintf("\x1b[23;5HRUNNER"); //Fix Height
-			//Implementar marcadores
-			//...
-		}*/
+			//Wait for key press
+		}
 		status = 0; // Jokalari egoera
 	
 	}
@@ -319,12 +348,8 @@ void jokoa01()
 				break;
 			case 4:
 				iprintf("\x1b[23;5HAldagai proba. Balioa= 4");
-				break;	
-			case 5: 
-				iprintf("\x1b[23;5HPAUSE");
 				break;
 			case 9: //tests
-				temp();
 				break;		
 		}
 	 }
