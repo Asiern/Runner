@@ -1,0 +1,7 @@
+1) Bihurtu nahi duzun irudiari "image.bmp" izena eman, eta exekutagarria dagoen karpeta berean gorde.
+   GARRANTZITSUA: Derrigorrez ".bmp" luzapena eta 16x16 tamaina izan behar ditu.
+2) Programa exekutatu.
+3) Kolore berri bat aurkitzen duenero geratu egingo da, erabiltzaileak koloreari dagokion zenbakia eman arte.
+   Kolorearen RGBa ezkerrean goian ikusiko duzu. Honen eskubiko testu kutxan zenbakia sartu eta 'Enter' sakatu.
+   Adibidez: R=0, G=0, B=255 urdina da, eta R=255, G=255, B=0 horia.
+4) Amaitzean, behekaldean dagoen testu kutxa handian ikusiko duzu matrizea.
