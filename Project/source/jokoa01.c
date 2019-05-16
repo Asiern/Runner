@@ -16,48 +16,46 @@ adibide batean oinarrituta.
 #include "fondoak.h"
 
 int denb;
-int status = 0; //0 jokalariak, 1 zailtasuna, 2 jokoa, 3 mark, 4 cheats
+int status = 0; //0 jokalariak, 1 zailtasuna, 2 jokoa, 3 mark
 int tekla=0;
 int jkop = 1; //jokalari kopurua
 int zailt = 1; //1 erraza, 2 normala, 3 zaila	
 
-int jokalariak () {	
-
+void jokalariak () {	
 		erakutsijokalariak();
 		
-		iprintf("\x1b[5;5HAukeratu jakalari kopurua");	//Fix Height
+		iprintf("\x1b[20;5HAukeratu jokalari kopurua");	//Fix Height
 		delay(50);
 		touchRead(&PANT_DAT);
-        iprintf("\x1b[7;5Hx = %d",PANT_DAT.px);
-        iprintf("\x1b[8;5Hy = %d",PANT_DAT.py);
+
 		//1 jokalari
 		if((PANT_DAT.px >= 18 && PANT_DAT.px <= 110) && (PANT_DAT.py >= 108 && PANT_DAT.py <= 129)){
-			jokoa01(1); // Zailtasun egoera
-			return jkop=1;
+			jkop = 1;
+			jokoa01(1); // Zailtasun egoera			
 		}
 
 		//2 jokalari
 		if((PANT_DAT.px >= 143 && PANT_DAT.px <= 235) && (PANT_DAT.py >= 108 && PANT_DAT.py <= 129)){
-			jokoa01(1); // Zailtasun egoera
-			return jkop=2;
+			jkop = 2;
+			jokoa01(1); // Zailtasun egoera			
 		}
 			
 		//3 jokalari
 		if((PANT_DAT.px >= 18 && PANT_DAT.px <= 110) && (PANT_DAT.py >= 150 && PANT_DAT.py <= 190)){
+			jkop = 3;
 			jokoa01(1); // Zailtasun egoera
-			return jkop=3;
 		}
 			
 		//4 jokalari
 		if((PANT_DAT.px >= 143 && PANT_DAT.px <= 235) && (PANT_DAT.py >= 150 && PANT_DAT.py <= 190)){
+			jkop = 4;
 			jokoa01(1); // Zailtasun egoera
-			return jkop=4;
 		}
 	
 }
 
 
-int zailtasuna () {
+void zailtasuna () {
 		delay(80);
 		erakutsizailtasuna();
 		PANT_DAT.px = 0;
@@ -72,20 +70,20 @@ int zailtasuna () {
 			
 		//Erraza
 		if((PANT_DAT.px >= 47 && PANT_DAT.px <= 209) && (PANT_DAT.py >= 90 && PANT_DAT.py <= 111)){
-			jokoa01(2); // Jokoa egoera			
-			return 1;			
+			zailt = 1;			
+			jokoa01(2); // Jokoa egoera						
 		}
 
 		//Normala
 		if((PANT_DAT.px >= 47 && PANT_DAT.px <= 209) && (PANT_DAT.py >= 124 && PANT_DAT.py <= 145)){
-			jokoa01(2); // Jokoa egoera
-			return 2;		
+			zailt = 2;
+			jokoa01(2); // Jokoa egoera		
 		}
 			
 		//Zaila
 		if((PANT_DAT.px >= 47 && PANT_DAT.px <= 209) && (PANT_DAT.py >= 158 && PANT_DAT.py <= 179)){
-			jokoa01(2); // Jokoa egoera			
-			return 3;
+			zailt = 3;
+			jokoa01(2); // Jokoa egoera
 			
 		}
 	}
@@ -506,11 +504,15 @@ void jokoa01(int status)
 	//config
 	TekEtenBaimendu();
 	ErlojuaMartxanJarri();
-    etenZerbErrutEzarri();
+    	etenZerbErrutEzarri();
 	DenbEtenBaimendu();
 	tenpZerbErrutEzarri();	
 	konfiguratuTeklatua(0x400C);
 	konfiguratuTenporizadorea(65208,0x00C3);
+
+	iprintf("\x1b[2;3H##########################");
+	iprintf("\x1b[4;3H          RUNNER          ");
+	iprintf("\x1b[6;3H##########################");
 
 
 	while(1){
@@ -519,22 +521,20 @@ void jokoa01(int status)
 		switch (status){
 
 			case 0:				
-				jkop = jokalariak();
+				jokalariak();
 				break;
-			case 1:
-				zailt = zailtasuna();
-				if (zailt != -1){
-					jokoa01(1);
-				}				
+			case 1:				
+				zailtasuna();
+				iprintf("\x1b[12;5HZailt: %d",zailt);
 				break;
 			case 2:
-				if (jkop = 1)
+				if (jkop == 1)
 					jokoa1players();
-				if (jkop = 2)
+				if (jkop == 2)
 					jokoa2players();
-				if (jkop = 4)
+				if (jkop == 3)
 					jokoa3players();
-				if (jkop = 4)
+				if (jkop == 4)
 					jokoa4players();
 				break;
 			case 3:
