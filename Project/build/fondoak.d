@@ -52,7 +52,9 @@ fondoak.o: /home/user/Desktop/Project/source/fondoak.c \
   /home/user/Desktop/Project/build/Atea.h \
   /home/user/Desktop/Project/build/AteaIrekita.h \
   /home/user/Desktop/Project/build/jokalariak.h \
-  /home/user/Desktop/Project/build/zailtasuna.h
+  /home/user/Desktop/Project/build/zailtasuna.h \
+  /home/user/Desktop/Project/build/jokoa.h \
+  /home/user/Desktop/Project/build/pause.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -161,3 +163,7 @@ fondoak.o: /home/user/Desktop/Project/source/fondoak.c \
 /home/user/Desktop/Project/build/jokalariak.h:
 
 /home/user/Desktop/Project/build/zailtasuna.h:
+
+/home/user/Desktop/Project/build/jokoa.h:
+
+/home/user/Desktop/Project/build/pause.h:

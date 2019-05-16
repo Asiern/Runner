@@ -10,9 +10,6 @@ periferikoak.c
 #include "fondoak.h"
 #include "spriteak.h"
 
-
-int EGOERA;
-int seg3;
 static int tik=0;
 static int seg=0;
 
@@ -25,14 +22,13 @@ void tekEten ()
 		Ezabatusonic(2,0,0);
 		Ezabatusonic(3,0,0);
 		Ezabatusonic(4,0,0);
-		erakutsiAteaIrekita();
+		erakutsipause();
 		while (stop == 0){
 			if(SakatutakoTekla() == A){
-				erakutsiAtea();				
+				erakutsijokoa();				
 				stop = 1;
-			}
-		}			
-
+			}	
+		}
 	}
 }
 

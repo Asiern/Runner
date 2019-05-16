@@ -1,0 +1,1 @@
+jokoa.o: jokoa.s

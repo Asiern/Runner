@@ -22,20 +22,15 @@ void jokoa01()
 {	
 	int tekla=0;
 	int jkop = 1;
-	int zailt = 1; //1 erraza, 2 normala, 3 zaila
-	int segundua = 0;
+	int zailt = 1; //1 erraza, 2 normala, 3 zaila	
 	
+
+	//config
 	TekEtenBaimendu();
 	ErlojuaMartxanJarri();
     	etenZerbErrutEzarri();
     	DenbEtenBaimendu();
-    	tenpZerbErrutEzarri();
-	
-
-	EGOERA = ZAI;
-	
-
-	//config	
+    	tenpZerbErrutEzarri();	
 	konfiguratuTeklatua(0x400C);
 	konfiguratuTenporizadorea(65208,0x00C3);
 	
@@ -45,30 +40,13 @@ void jokoa01()
 	void delay (int x){ //delay = x ms
 		int time = 0;
 
-		ErlojuaMartxanJarri();
 		while (x > time){
 			time++;
 			//iprintf("\x1b[23;5HTIME: %d",time);
 		}
-		ErlojuaGelditu();
 	}
 
-
-	void prueba(){
-		static int tik=0;
-		static int seg=0;
-		tik++; 
-		if (tik==100)
-		{
-			seg++;
-			iprintf("\x1b[1;5HPasa diren segunduak=%d", seg);
-			tik=0;		
-				
-		}	
-	}	
-
-
-	void temp (){
+	/*void temp (){
 		int stop = 0;
 		int tick = 0;
 		int dec = 0;
@@ -88,7 +66,7 @@ void jokoa01()
 	
 			iprintf("\x1b[22;5H%d : %d",sec, dec);
 		}
-	}
+	}*/
 			
 
 	int jokalariak () {	
@@ -97,7 +75,7 @@ void jokoa01()
 		PANT_DAT.px = 0;
 		PANT_DAT.py = 0;
 		iprintf("\x1b[23;5HAukeratu jakalari kopurua");	//Fix Height
-
+		delay(50);
 		while (PANT_DAT.px == 0 && PANT_DAT.py == 0){
 			touchRead(&PANT_DAT); //posizioaren irakurketa			
 		}		
@@ -130,12 +108,13 @@ void jokoa01()
 	}
 
 	int zailtasuna () {
+		delay(80);
 		erakutsizailtasuna();
 		PANT_DAT.px = 0;
 		PANT_DAT.py = 0;
 
 		iprintf("\x1b[23;5HAukeratu zailtasuna"); //Fix Height
-
+		
 		while (PANT_DAT.px == 0 && PANT_DAT.py == 0){
 			touchRead(&PANT_DAT);
 		}
@@ -161,7 +140,260 @@ void jokoa01()
 		}
 	}
 
-	void jokoa () {
+	
+	void jokoa1players () {
+		int pushA = 1;
+	
+		//J1
+		int j1 = 0; //finished(1) or not(0)
+		int j1x = 5; //x pos of j1
+		static int j1y = 40; //y pos of j1
+
+		//J2
+		int j2 = 0; //finished(1) or not(0)
+		int j2x = 5; //x pos of j2
+		static int j2y = 68; //y pos of j2
+
+		//J3
+		int j3 = 0; //finished(1) or not(0)
+		int j3x = 5; //x pos of j3
+		static int j3y = 96; //y pos of j3
+
+		//J4
+		int j4 = 0; //finished(1) or not(0)
+		int j4x = 5; //x pos of j4
+		static int j4y = 124; //y pos of j4
+
+		erakutsijokoa();
+
+		//load sprites
+		Erakutsisonic(1,j1x,j1y);
+		Erakutsisonic(2,j2x,j2y);
+		Erakutsisonic(3,j3x,j3y);
+		Erakutsisonic(4,j4x,j4y);
+
+		while (j1 == 0 || j2 == 0 || j3 == 0 || j4 == 0) {
+			
+			if(SakatutakoTekla() == A){
+                		if(TeklaDetektatu() == pushA){
+                    			if (pushA == 1){
+                        			Ezabatusonic(1,j1x,40);
+                        			Erakutsisonic(1,j1x+1,40);
+                        			j1x = j1x+5;
+                       	 			pushA = 0;
+                        			if (j1x >= 220)					
+                        			{
+                            				iprintf("\x1b[10;5HPOS: %d",j1x);
+                            				Ezabatusonic(1,j1x,40);
+                            				j1 = 1;
+                            	
+                        			}
+                    			}
+                    			else
+                    			{
+                       				pushA = 1;
+                    			}
+                    	
+          		      	}	
+			}			
+			//IA
+		}
+		
+		status = 3; // Mark egoera
+	
+	}
+	void jokoa2players () {
+		int pushA = 1;
+		int pushB = 1;
+		
+		//J1
+		int j1 = 0; //finished(1) or not(0)
+		int j1x = 5; //x pos of j1
+		static int j1y = 40; //y pos of j1
+
+		//J2
+		int j2 = 0; //finished(1) or not(0)
+		int j2x = 5; //x pos of j2
+		static int j2y = 68; //y pos of j2
+
+		//J3
+		int j3 = 0; //finished(1) or not(0)
+		int j3x = 5; //x pos of j3
+		static int j3y = 96; //y pos of j3
+
+		//J4
+		int j4 = 0; //finished(1) or not(0)
+		int j4x = 5; //x pos of j4
+		static int j4y = 124; //y pos of j4
+
+		erakutsijokoa();
+
+		//load sprites
+		Erakutsisonic(1,j1x,j1y);
+		Erakutsisonic(2,j2x,j2y);
+		Erakutsisonic(3,j3x,j3y);
+		Erakutsisonic(4,j4x,j4y);
+
+		while (j1 == 0 || j2 == 0 || j3 == 0 || j4 == 0) {
+			
+			if(SakatutakoTekla() == A){
+                		if(TeklaDetektatu() == pushA){
+                    			if (pushA == 1){
+                        			Ezabatusonic(1,j1x,40);
+                        			Erakutsisonic(1,j1x+1,40);
+                        			j1x = j1x+5;
+                       	 			pushA = 0;
+                        			if (j1x >= 220)					
+                        			{
+                            				iprintf("\x1b[10;5HPOS: %d",j1x);
+                            				Ezabatusonic(1,j1x,40);
+                            				j1 = 1;
+                            	
+                        			}
+                    			}
+                    			else
+                    			{
+                       				pushA = 1;
+                    			}
+                    	
+          		      	}	
+			}
+
+			if(SakatutakoTekla() == B){
+	         		if(TeklaDetektatu() == pushB){
+	                    		if (pushB == 1){
+	                        			EzabatuErronboHandia(2,j2x,j2y);
+	                        			Erakutsisonic(2,j2x+1,j2y);
+	                        			j2x = j2x+5;
+	                        			pushB = 0;
+	                        			if (j2x >= 220)					
+	                       				{
+	                           				Ezabatusonic(2,j2x,j2y);
+	                           				j2 = 1;
+	                            
+	                        			}
+	                    		}
+	                    		else
+	                    		{
+	                        		pushB = 1;
+	                    		}
+	                       	}	    		
+			}
+			//IA
+		}
+		
+		status = 3; // Mark egoera
+
+	}
+	void jokoa3players () {
+		int pushA = 1;
+		int pushB = 1;
+		int pushGORA = 1;
+
+		//J1
+		int j1 = 0; //finished(1) or not(0)
+		int j1x = 5; //x pos of j1
+		static int j1y = 40; //y pos of j1
+
+		//J2
+		int j2 = 0; //finished(1) or not(0)
+		int j2x = 5; //x pos of j2
+		static int j2y = 68; //y pos of j2
+
+		//J3
+		int j3 = 0; //finished(1) or not(0)
+		int j3x = 5; //x pos of j3
+		static int j3y = 96; //y pos of j3
+
+		//J4
+		int j4 = 0; //finished(1) or not(0)
+		int j4x = 5; //x pos of j4
+		static int j4y = 124; //y pos of j4
+
+		erakutsijokoa();
+
+		//load sprites
+		Erakutsisonic(1,j1x,j1y);
+		Erakutsisonic(2,j2x,j2y);
+		Erakutsisonic(3,j3x,j3y);
+		Erakutsisonic(4,j4x,j4y);
+
+		while (j1 == 0 || j2 == 0 || j3 == 0 || j4 == 0) {
+			
+			if(SakatutakoTekla() == A){
+                		if(TeklaDetektatu() == pushA){
+                    			if (pushA == 1){
+                        			Ezabatusonic(1,j1x,40);
+                        			Erakutsisonic(1,j1x+1,40);
+                        			j1x = j1x+5;
+                       	 			pushA = 0;
+                        			if (j1x >= 220)					
+                        			{
+                            				iprintf("\x1b[10;5HPOS: %d",j1x);
+                            				Ezabatusonic(1,j1x,40);
+                            				j1 = 1;
+                            	
+                        			}
+                    			}
+                    			else
+                    			{
+                       				pushA = 1;
+                    			}
+                    	
+          		      	}	
+			}
+
+			if(SakatutakoTekla() == B){
+	         		if(TeklaDetektatu() == pushB){
+	                    		if (pushB == 1){
+	                        			EzabatuErronboHandia(2,j2x,j2y);
+	                        			Erakutsisonic(2,j2x+1,j2y);
+	                        			j2x = j2x+5;
+	                        			pushB = 0;
+	                        			if (j2x >= 220)					
+	                       				{
+	                           				Ezabatusonic(2,j2x,j2y);
+	                           				j2 = 1;
+	                            
+	                        			}
+	                    		}
+	                    		else
+	                    		{
+	                        		pushB = 1;
+	                    		}
+	                       	}	    		
+			}
+
+			if(SakatutakoTekla() == GORA){
+	         		if(TeklaDetektatu() == pushGORA){
+	                    		if (pushGORA == 1){
+	                        		Ezabatusonic(3,j3x,j3y);
+	                        		Erakutsisonic(3,j3x+1,j3y);
+	                        		j3x = j3x+5;
+	                        		pushGORA = 0;
+	                        		if (j3x >= 220)					
+	                        		{
+	                            			Ezabatusonic(3,j3x,j3y);
+	                            			j3 = 1;	                            
+	                        		}
+	                    		}
+	                    		else
+	                    		{
+	                        		pushGORA = 1;
+	                    		}
+	                    
+	                	}    		
+			}
+			//IA
+			
+		}
+		
+		status = 3; // Mark egoera	
+			
+	}
+
+
+	void jokoa4players () {
 		int pushA = 1;
 		int pushB = 1;
 		int pushGORA = 1;
@@ -187,7 +419,7 @@ void jokoa01()
 		int j4x = 5; //x pos of j4
 		static int j4y = 124; //y pos of j4
 
-		erakutsiAtea();
+		erakutsijokoa();
 
 		//load sprites
 		Erakutsisonic(1,j1x,j1y);
@@ -200,14 +432,14 @@ void jokoa01()
 			if(SakatutakoTekla() == A){
                 		if(TeklaDetektatu() == pushA){
                     			if (pushA == 1){
-                        			EzabatuErronboHandia(1,j1x,40);
-                        			ErakutsiErronboHandia(1,j1x+1,40);
+                        			Ezabatusonic(1,j1x,40);
+                        			Erakutsisonic(1,j1x+1,40);
                         			j1x = j1x+5;
                        	 			pushA = 0;
                         			if (j1x >= 220)					
                         			{
                             				iprintf("\x1b[10;5HPOS: %d",j1x);
-                            				EzabatuErronboHandia(1,j1x,40);
+                            				Ezabatusonic(1,j1x,40);
                             				j1 = 1;
                             	
                         			}
@@ -220,91 +452,68 @@ void jokoa01()
           		      	}	
 			}
 
-			if (jkop == 1)
-			{
-				//mugimendu clock
-			}
-			else {
-
-				if(SakatutakoTekla() == B){
-	         			if(TeklaDetektatu() == pushB){
-	                    			if (pushB == 1){
-	                        				EzabatuErronboHandia(2,j2x,j2y);
-	                        				Erakutsisonic(2,j2x+1,j2y);
-	                        				j2x = j2x+5;
-	                        				pushB = 0;
-	                        				if (j2x >= 220)					
-	                        				{
-	                            					//Ezabatusonic(2,j2x,j2y);
-	                            					j2 = 1;
+			if(SakatutakoTekla() == B){
+	         		if(TeklaDetektatu() == pushB){
+	                    		if (pushB == 1){
+	                        			EzabatuErronboHandia(2,j2x,j2y);
+	                        			Erakutsisonic(2,j2x+1,j2y);
+	                        			j2x = j2x+5;
+	                        			pushB = 0;
+	                        			if (j2x >= 220)					
+	                       				{
+	                           				Ezabatusonic(2,j2x,j2y);
+	                           				j2 = 1;
 	                            
-	                        				}
-	                    			}
-	                    			else
-	                    			{
-	                        			pushB = 1;
-	                    			}
-	                    
-	                		}
-	    			}
-			}
-
-	    		if (jkop == 1 || jkop == 2)
-			{
-				//mugimendu clock
-			}
-			else {
-
-				if(SakatutakoTekla() == GORA){
-	         			if(TeklaDetektatu() == pushGORA){
-	                    			if (pushGORA == 1){
-	                        			Ezabatusonic(3,j3x,j3y);
-	                        			Erakutsisonic(3,j3x+1,j3y);
-	                        			j3x = j3x+5;
-	                        			pushGORA = 0;
-	                        			if (j3x >= 220)					
-	                        			{
-	                            				//Ezabatusonic(3,j3x,j3y);
-	                            				j3 = 1;	                            
 	                        			}
-	                    			}
-	                    			else
-	                    			{
-	                        			pushGORA = 1;
-	                    			}
+	                    		}
+	                    		else
+	                    		{
+	                        		pushB = 1;
+	                    		}
+	                       	}	    		
+			}
+
+			if(SakatutakoTekla() == GORA){
+	         		if(TeklaDetektatu() == pushGORA){
+	                    		if (pushGORA == 1){
+	                        		Ezabatusonic(3,j3x,j3y);
+	                        		Erakutsisonic(3,j3x+1,j3y);
+	                        		j3x = j3x+5;
+	                        		pushGORA = 0;
+	                        		if (j3x >= 220)					
+	                        		{
+	                            			Ezabatusonic(3,j3x,j3y);
+	                            			j3 = 1;	                            
+	                        		}
+	                    		}
+	                    		else
+	                    		{
+	                        		pushGORA = 1;
+	                    		}
 	                    
-	                		}
-	    			}
-
+	                	}    		
 			}
 
-			if (jkop == 1 || jkop == 2 || jkop == 3)
-			{
-				//mugimendu clock
-			}
-			else {
-
-				if(SakatutakoTekla() == BEHERA){
-	         			if(TeklaDetektatu() == pushBEHERA){
-	                    			if (pushBEHERA == 1){
-	                        			Ezabatusonic(4,j4x,j4y);
-	                        			Erakutsisonic(4,j4x+1,j4y);
-	                        			j4x = j4x+5;
-	                        			pushBEHERA = 0;
-	                        			if (j4x >= 220)					
-	                        			{
-	                            				//Ezabatusonic(4,j4x,80);
-	                            				j4 = 1;
-	                                       		}
-	                    			}
-	                    			else
-	                    			{
-	                      		  		pushBEHERA = 1;
-	                    			}
+			if(SakatutakoTekla() == BEHERA){
+	         		if(TeklaDetektatu() == pushBEHERA){
+	                    		if (pushBEHERA == 1){
+	                        		Ezabatusonic(4,j4x,j4y);
+	                        		Erakutsisonic(4,j4x+1,j4y);
+	                        		j4x = j4x+5;
+	                        		pushBEHERA = 0;
+	                        		if (j4x >= 220)					
+	                        		{
+	                            			Ezabatusonic(4,j4x,80);
+	                            			j4 = 1;
+	                                       	}
+	                    		}
+	                    		else
+	                    		{
+	                      		  	pushBEHERA = 1;
+	                    		}
 	                    
-	                		}
-	    			}
-			}
+	                	}
+	    		}
 			
 		}
 		
@@ -341,7 +550,14 @@ void jokoa01()
 				zailt = zailtasuna();				
 				break;
 			case 2:
-				jokoa();
+				if (jkop = 1)
+					jokoa1players();
+				if (jkop = 2)
+					jokoa2players();
+				if (jkop = 4)
+					jokoa3players();
+				if (jkop = 4)
+					jokoa4players();
 				break;
 			case 3:
 				mark();
