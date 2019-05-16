@@ -32,10 +32,6 @@ void tekEten ()
 				jokoa01(0);			
 				stop = 1;
 			}
-			if(SakatutakoTekla() == GORA){
-                jokoa01(1);
-                stop=1;
-			}	
 		}
 	}
 }
@@ -49,7 +45,7 @@ void tenpEten()
 		if (tik==1)
 		{
 			dec++;
-			iprintf("\x1b[20;5HPasa diren segunduak=%d DECS:  %d", seg,dec);	
+			//iprintf("\x1b[20;5HPasa diren segunduak=%d DECS:  %d", seg,dec);	
 			if (dec == 100)
 			{
 				seg++;	
