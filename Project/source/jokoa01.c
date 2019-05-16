@@ -17,97 +17,47 @@ adibide batean oinarrituta.
 
 int denb;
 int status = 0; //0 jokalariak, 1 zailtasuna, 2 jokoa, 3 mark, 4 cheats
+int tekla=0;
+int jkop = 1; //jokalari kopurua
+int zailt = 1; //1 erraza, 2 normala, 3 zaila	
 
-void jokoa01()
-{	
-	int tekla=0;
-	int jkop = 1;
-	int zailt = 1; //1 erraza, 2 normala, 3 zaila	
-	
-
-	//config
-	TekEtenBaimendu();
-	ErlojuaMartxanJarri();
-    	etenZerbErrutEzarri();
-    	DenbEtenBaimendu();
-    	tenpZerbErrutEzarri();	
-	konfiguratuTeklatua(0x400C);
-	konfiguratuTenporizadorea(65208,0x00C3);
-	
-
-
-	//Methods
-	void delay (int x){ //delay = x ms
-		int time = 0;
-
-		while (x > time){
-			time++;
-			//iprintf("\x1b[23;5HTIME: %d",time);
-		}
-	}
-
-	/*void temp (){
-		int stop = 0;
-		int tick = 0;
-		int dec = 0;
-		int sec = 0;
-		while(stop == 0){
-	
-			tick = tick + 1;
-	
-			if (tick % 800 == 0){
-				dec = dec + 1;
-			}
-	
-			if (dec == 10){
-				sec = sec + 1;
-				dec = 0;
-			}
-	
-			iprintf("\x1b[22;5H%d : %d",sec, dec);
-		}
-	}*/
-			
-
-	int jokalariak () {	
+int jokalariak () {	
 
 		erakutsijokalariak();
-		PANT_DAT.px = 0;
-		PANT_DAT.py = 0;
-		iprintf("\x1b[23;5HAukeratu jakalari kopurua");	//Fix Height
-		delay(50);
-		while (PANT_DAT.px == 0 && PANT_DAT.py == 0){
-			touchRead(&PANT_DAT); //posizioaren irakurketa			
-		}		
 		
-
+		iprintf("\x1b[5;5HAukeratu jakalari kopurua");	//Fix Height
+		delay(50);
+		touchRead(&PANT_DAT);
+        iprintf("\x1b[7;5Hx = %d",PANT_DAT.px);
+        iprintf("\x1b[8;5Hy = %d",PANT_DAT.py);
 		//1 jokalari
 		if((PANT_DAT.px >= 18 && PANT_DAT.px <= 110) && (PANT_DAT.py >= 108 && PANT_DAT.py <= 129)){
-			status = 1; // Zailtasun egoera
+			jokoa01(1); // Zailtasun egoera
 			return jkop=1;
 		}
 
 		//2 jokalari
 		if((PANT_DAT.px >= 143 && PANT_DAT.px <= 235) && (PANT_DAT.py >= 108 && PANT_DAT.py <= 129)){
-			status = 1; // Zailtasun egoera
+			jokoa01(1); // Zailtasun egoera
 			return jkop=2;
 		}
 			
 		//3 jokalari
 		if((PANT_DAT.px >= 18 && PANT_DAT.px <= 110) && (PANT_DAT.py >= 150 && PANT_DAT.py <= 190)){
-			status = 1; // Zailtasun egoera
+			jokoa01(1); // Zailtasun egoera
 			return jkop=3;
 		}
 			
 		//4 jokalari
 		if((PANT_DAT.px >= 143 && PANT_DAT.px <= 235) && (PANT_DAT.py >= 150 && PANT_DAT.py <= 190)){
-			status = 1; // Zailtasun egoera
+			jokoa01(1); // Zailtasun egoera
 			return jkop=4;
 		}
 	
-	}
+}
 
-	int zailtasuna () {
+
+int zailtasuna () {
 		delay(80);
 		erakutsizailtasuna();
 		PANT_DAT.px = 0;
@@ -122,26 +72,25 @@ void jokoa01()
 			
 		//Erraza
 		if((PANT_DAT.px >= 47 && PANT_DAT.px <= 209) && (PANT_DAT.py >= 90 && PANT_DAT.py <= 111)){
-			status = 2; // Jokoa egoera			
+			jokoa01(2); // Jokoa egoera			
 			return 1;			
 		}
 
 		//Normala
 		if((PANT_DAT.px >= 47 && PANT_DAT.px <= 209) && (PANT_DAT.py >= 124 && PANT_DAT.py <= 145)){
-			status = 2; // Jokoa egoera
+			jokoa01(2); // Jokoa egoera
 			return 2;		
 		}
 			
 		//Zaila
 		if((PANT_DAT.px >= 47 && PANT_DAT.px <= 209) && (PANT_DAT.py >= 158 && PANT_DAT.py <= 179)){
-			status = 2; // Jokoa egoera			
+			jokoa01(2); // Jokoa egoera			
 			return 3;
 			
 		}
 	}
 
-	
-	void jokoa1players () {
+void jokoa1players () {
 		int pushA = 1;
 	
 		//J1
@@ -199,10 +148,11 @@ void jokoa01()
 			//IA
 		}
 		
-		status = 3; // Mark egoera
+		jokoa01(3); // Mark egoera
 	
 	}
-	void jokoa2players () {
+
+void jokoa2players () {
 		int pushA = 1;
 		int pushB = 1;
 		
@@ -282,10 +232,13 @@ void jokoa01()
 			//IA
 		}
 		
-		status = 3; // Mark egoera
+		jokoa01(3);; // Mark egoera
 
 	}
-	void jokoa3players () {
+
+
+
+void jokoa3players () {
 		int pushA = 1;
 		int pushB = 1;
 		int pushGORA = 1;
@@ -388,12 +341,10 @@ void jokoa01()
 			
 		}
 		
-		status = 3; // Mark egoera	
+		jokoa01(3); // Mark egoera	
 			
 	}
-
-
-	void jokoa4players () {
+void jokoa4players () {
 		int pushA = 1;
 		int pushB = 1;
 		int pushGORA = 1;
@@ -517,9 +468,12 @@ void jokoa01()
 			
 		}
 		
-		status = 3; // Mark egoera
+		jokoa01(3); // Mark egoera
 		
 	}
+
+
+	
 
 	void mark () {
 		//erakutsizailtasuna();
@@ -534,12 +488,33 @@ void jokoa01()
 		while (TeklaDetektatu() == 0){
 			//Wait for key press
 		}
-		status = 0; // Jokalari egoera
+		jokoa01(0); // Jokalari egoera
 	
 	}
 
+	void delay (int x){ //delay = x ms
+			int time = 0;
+
+			while (x > time){
+				time++;
+			}
+	}
+
+void jokoa01(int status)
+{	
+
+	//config
+	TekEtenBaimendu();
+	ErlojuaMartxanJarri();
+    etenZerbErrutEzarri();
+	DenbEtenBaimendu();
+	tenpZerbErrutEzarri();	
+	konfiguratuTeklatua(0x400C);
+	konfiguratuTenporizadorea(65208,0x00C3);
+
 
 	while(1){
+	    //iprintf("\x1b[16;7HStatus = %d",status);
 		//Egoeren aldaketa
 		switch (status){
 
@@ -547,7 +522,10 @@ void jokoa01()
 				jkop = jokalariak();
 				break;
 			case 1:
-				zailt = zailtasuna();				
+				zailt = zailtasuna();
+				if (zailt != -1){
+					jokoa01(1);
+				}				
 				break;
 			case 2:
 				if (jkop = 1)
@@ -562,15 +540,10 @@ void jokoa01()
 			case 3:
 				mark();
 				break;
-			case 4:
-				iprintf("\x1b[23;5HAldagai proba. Balioa= 4");
-				break;
 			case 9: //tests
 				break;		
 		}
 	 }
-
-	
 
 	
 }

@@ -28,6 +28,14 @@ void tekEten ()
 				erakutsijokoa();				
 				stop = 1;
 			}	
+			if(SakatutakoTekla() == B){
+				jokoa01(0);			
+				stop = 1;
+			}
+			if(SakatutakoTekla() == GORA){
+                jokoa01(1);
+                stop=1;
+			}	
 		}
 	}
 }

@@ -24,7 +24,7 @@ int main(void) {
 	//EtenakBaimendu();
 
 	//Zuen jokoari dei egingo zaio hemendik
-	jokoa01();
+	jokoa01(0);
 
 	return(0);
 
