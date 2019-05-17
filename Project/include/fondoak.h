@@ -8,3 +8,4 @@ extern void erakutsijokalariak();
 extern void erakutsizailtasuna();
 extern void erakutsipause();
 extern void erakutsijokoa();
+extern void erakutsiscore();

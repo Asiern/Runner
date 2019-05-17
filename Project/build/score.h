@@ -1,25 +1,25 @@
 
-//{{BLOCK(pause)
+//{{BLOCK(score)
 
 //======================================================================
 //
-//	pause, 256x192@16, 
+//	score, 256x192@16, 
 //	Alphabit on.
 //	+ bitmap not compressed
 //	Total size: 98304 = 98304
 //
-//	Time-stamp: 2019-05-17, 08:31:29
+//	Time-stamp: 2019-05-17, 11:02:42
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
 //======================================================================
 
-#ifndef GRIT_PAUSE_H
-#define GRIT_PAUSE_H
+#ifndef GRIT_SCORE_H
+#define GRIT_SCORE_H
 
-#define pauseBitmapLen 98304
-extern const unsigned int pauseBitmap[24576];
+#define scoreBitmapLen 98304
+extern const unsigned int scoreBitmap[24576];
 
-#endif // GRIT_PAUSE_H
+#endif // GRIT_SCORE_H
 
-//}}BLOCK(pause)
+//}}BLOCK(score)

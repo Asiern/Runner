@@ -6,3 +6,4 @@ extern void jokoa01(int status);
 extern void delay();
 extern int zailt;
 extern int jkop;
+extern int timereset;

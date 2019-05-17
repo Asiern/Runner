@@ -54,7 +54,8 @@ fondoak.o: /home/user/Desktop/Project/source/fondoak.c \
   /home/user/Desktop/Project/build/jokalariak.h \
   /home/user/Desktop/Project/build/zailtasuna.h \
   /home/user/Desktop/Project/build/jokoa.h \
-  /home/user/Desktop/Project/build/pause.h
+  /home/user/Desktop/Project/build/pause.h \
+  /home/user/Desktop/Project/build/score.h
 
 /opt/devkitPro/libnds/include/nds.h:
 
@@ -167,3 +168,5 @@ fondoak.o: /home/user/Desktop/Project/source/fondoak.c \
 /home/user/Desktop/Project/build/jokoa.h:
 
 /home/user/Desktop/Project/build/pause.h:
+
+/home/user/Desktop/Project/build/score.h:

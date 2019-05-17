@@ -19,6 +19,7 @@ automatikoki sortzen dira, konpilatzerako garaian, baina horretarako gogoratu be
 #include "zailtasuna.h"
 #include "jokoa.h"
 #include "pause.h"
+#include "score.h"
 
 /* irudiak memorian kopiatzeko DMA kanala aukeratu (3.a) */
 static const int DMA_CHANNEL = 3;
@@ -31,6 +32,14 @@ void erakutsiAtea() {
                      AteaBitmap, /* Automatikoki sortzen den aldagaia */
                      (uint16 *)BG_BMP_RAM(0), /* Fondo nagusiaren helbidea */
                      AteaBitmapLen); /* Luzera (bytetan) automatikoki sortzen den aldagaia */
+}
+
+void erakutsiscore() {
+	
+	dmaCopyHalfWords(DMA_CHANNEL,
+                     scoreBitmap, /* Automatikoki sortzen den aldagaia */
+                     (uint16 *)BG_BMP_RAM(0), /* Fondo nagusiaren helbidea */
+                     scoreBitmapLen); /* Luzera (bytetan) automatikoki sortzen den aldagaia */
 }
 
 void erakutsiAteaIrekita() {

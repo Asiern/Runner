@@ -21,20 +21,12 @@ int tekla=0;
 int jkop = 1; //jokalari kopurua
 int zailt = 1; //1 erraza, 2 normala, 3 zaila
 int tik; //extern tik, zerbitzu errutinatik
-int denbora = 0;
-
-void mugimendu (int num,int x, int y) {
-	Ezabatusonic(num,x,y);
-        Erakutsisonic(num,x+1,y);
-}
+int timereset = 0; // erlojua 0 jartzeko
 
 void jokalariak () {	
-		erakutsijokalariak();
-		
-		//iprintf("\x1b[20;5HAukeratu jokalari kopurua");
-		//iprintf("\x1b[20;5HAukeratu jokalari kopurua");	//Fix Height
-		delay(50);
-		touchRead(&PANT_DAT);
+		erakutsijokalariak(); //fondoa bistaratu
+		delay(50); //delay bat ukimen pantaila erabiltzerakoan bi ukimen ez irakurtzeko
+		touchRead(&PANT_DAT); // pantaila irakurri
 
 		//1 jokalari
 		if((PANT_DAT.px >= 18 && PANT_DAT.px <= 110) && (PANT_DAT.py >= 108 && PANT_DAT.py <= 129)){
@@ -64,47 +56,49 @@ void jokalariak () {
 
 
 void zailtasuna () {
-		delay(800);
-		erakutsizailtasuna();
-		PANT_DAT.px = 0;
+		delay(800); //delay bat ukimen pantaila erabiltzerakoan bi ukimen ez irakurtzeko
+		erakutsizailtasuna(); //fondoa bistaratu
+		PANT_DAT.px = 0; //x eta y balioak hasieratu
 		PANT_DAT.py = 0;
 
 		//iprintf("\x1b[23;5HAukeratu zailtasuna"); //Fix Height
 		
 		while (PANT_DAT.px == 0 && PANT_DAT.py == 0){
-			touchRead(&PANT_DAT);
+			touchRead(&PANT_DAT); //pantaila irakurri
 		}
 			
 			
 		//Erraza
 		if((PANT_DAT.px >= 47 && PANT_DAT.px <= 209) && (PANT_DAT.py >= 90 && PANT_DAT.py <= 111)){
-			zailt = 1;			
+			zailt = 1;	// zailtasun erraza	
 			jokoa01(2); // Jokoa egoera						
 		}
 
 		//Normala
 		if((PANT_DAT.px >= 47 && PANT_DAT.px <= 209) && (PANT_DAT.py >= 124 && PANT_DAT.py <= 145)){
-			zailt = 2;
+			zailt = 2;	// zailtasun nomala	
 			jokoa01(2); // Jokoa egoera		
 		}
 			
 		//Zaila
 		if((PANT_DAT.px >= 47 && PANT_DAT.px <= 209) && (PANT_DAT.py >= 158 && PANT_DAT.py <= 179)){
-			zailt = 3;
+			zailt = 3;	// zailtasun zaila
 			jokoa01(2); // Jokoa egoera
 			
 		}
 	}
 
-void jokoa1players () {
+void jokoa1players () { //jokalari batentzako void-a
 		int pushA = 1;
+		/* Pushak (A, B, GORA, BEHERA) tekla sakatuta mantenduz ez mugitzeko erabiltzan dira jokoaren 4 voidetan 
+		(jokoa1players,jokoa2players,jokoa3players,jokoa4players)*/
 	
 		//J1
 		int j1 = 0; //finished(1) or not(0)
 		int j1x = 5; //x pos of j1
 		static int j1y = 40; //y pos of j1
 
-		erakutsijokoa();
+		erakutsijokoa(); //fondoa bistaratu
 
 		//load sprites
 		Erakutsisonic(1,j1x,j1y);
@@ -112,16 +106,17 @@ void jokoa1players () {
 		Erakutsisonic(3,5,96);
 		Erakutsisonic(4,5,124);
 
-		delay(2000);
+		delay(2000); // delay bat hasteko
 
 		tenpZerbErrutEzarri();	
+		timereset = 1; // erlojua martxan jarri hasieratuta
 		while (j1 == 0) {
 			
 			
 			if(SakatutakoTekla() == A && TeklaDetektatu() == pushA){
                     		if (pushA == 1){
                         		Ezabatusonic(1,j1x,40);
-                        		Erakutsisonic(1,j1x+1,40);
+                        		Erakutsisonic(1,j1x+5,40);
                         		j1x = j1x+5;
                        	 		pushA = 0;
                         		if (j1x >= 220)					
@@ -135,15 +130,14 @@ void jokoa1players () {
                        			pushA = 1;
                     		}
                     		
-			}			
-			//IA
+			}		
 		}
-		
+		timereset = 0; // Erlojua gelditu eta hasieratu
 		jokoa01(3); // Mark egoera
 	
 	}
 
-void jokoa2players () {
+void jokoa2players () { // 2 jokalarientzako void-a
 		int pushA = 1;
 		int pushB = 1;
 		
@@ -158,7 +152,7 @@ void jokoa2players () {
 		static int j2y = 68; //y pos of j2
 
 		erakutsijokoa();
-
+	
 		//load sprites
 		Erakutsisonic(1,j1x,j1y);
 		Erakutsisonic(2,j2x,j2y);
@@ -166,6 +160,7 @@ void jokoa2players () {
 		Erakutsisonic(4,5,124);
 
 		tenpZerbErrutEzarri();
+		timereset = 1;
 		while (j1 == 0 || j2 == 0) {
 			
 			if(SakatutakoTekla() == A){
@@ -177,7 +172,7 @@ void jokoa2players () {
                        	 			pushA = 0;
                         			if (j1x >= 220)					
                         			{
-                            				iprintf("\x1b[10;5HPOS: %d",j1x);
+                            				//iprintf("\x1b[10;5HPOS: %d",j1x);
                             				Ezabatusonic(1,j1x,40);
                             				j1 = 1;
                             	
@@ -213,14 +208,14 @@ void jokoa2players () {
 			}
 			//IA
 		}
-		
+		timereset = 0;
 		jokoa01(3);; // Mark egoera
 
 	}
 
 
 
-void jokoa3players () {
+void jokoa3players () { // 3 jokalarientzako void-a
 		int pushA = 1;
 		int pushB = 1;
 		int pushGORA = 1;
@@ -250,6 +245,7 @@ void jokoa3players () {
 
 	
 		tenpZerbErrutEzarri();
+		timereset = 1;
 		while (j1 == 0 || j2 == 0 || j3 == 0) {
 			
 			if(SakatutakoTekla() == A){
@@ -261,7 +257,7 @@ void jokoa3players () {
                        	 			pushA = 0;
                         			if (j1x >= 220)					
                         			{
-                            				iprintf("\x1b[10;5HPOS: %d",j1x);
+                            				//iprintf("\x1b[10;5HPOS: %d",j1x);
                             				Ezabatusonic(1,j1x,40);
                             				j1 = 1;
                             	
@@ -319,11 +315,11 @@ void jokoa3players () {
 			//IA
 			
 		}
-		
+		timereset = 0;
 		jokoa01(3); // Mark egoera	
 			
 	}
-void jokoa4players () {
+void jokoa4players () { // 4 jokalarientzako void-a
 		int pushA = 1;
 		int pushB = 1;
 		int pushGORA = 1;
@@ -359,6 +355,7 @@ void jokoa4players () {
 		Erakutsisonic(4,j4x,j4y);
 		
 		tenpZerbErrutEzarri();
+		timereset = 1;
 		while (j1 == 0 || j2 == 0 || j3 == 0 || j4 == 0) {
 			
 			if(SakatutakoTekla() == A){
@@ -370,7 +367,7 @@ void jokoa4players () {
                        	 			pushA = 0;
                         			if (j1x >= 220)					
                         			{
-                            				iprintf("\x1b[10;5HPOS: %d",j1x);
+                            				//iprintf("\x1b[10;5HPOS: %d",j1x);
                             				Ezabatusonic(1,j1x,40);
                             				j1 = 1;
                             	
@@ -448,7 +445,7 @@ void jokoa4players () {
 	    		}
 			
 		}
-		denbora = tik;
+		timereset = 0;
 		jokoa01(3); // Mark egoera
 		
 	}
@@ -457,22 +454,9 @@ void jokoa4players () {
 	
 
 	void mark () {
-		int sec = 0;
-		int dec = 0;
-		//erakutsizailtasuna();
-		iprintf("\x1b[5;7HRUNNER"); //Fix Height
-		while (denbora >= 100){
-			denbora = denbora - 100;
-			sec++;
-		}
-		dec = denbora;
-		
-		
-		iprintf("\x1b[10;7HJ1 -> %d s %d ms",sec,dec);
-		iprintf("\x1b[12;7HJ2 -> %d s %d ms",sec,dec);
-		iprintf("\x1b[14;7HJ3 -> %d s %d ms",sec,dec);
-		iprintf("\x1b[16;7HJ4 -> %d s %d ms",sec,dec);
-		iprintf("\x1b[20;2HSakatu tekla bat jarraitzeko");
+		erakutsiscore(); //fondoa bistaratu
+		iprintf("\x1b[20;2H  Sakatu tekla bat jarraitzeko  ");
+		delay(800);
 		while (TeklaDetektatu() == 0){
 			//Wait for key press
 		}
@@ -480,12 +464,13 @@ void jokoa4players () {
 	
 	}
 
+	
 	void delay (int x){ //delay = x ms
 			int time = 0;
 
 			while (x > time){
 				x--;				
-				iprintf("\x1b[15;7HEMPIEZZA %d ",x);
+				iprintf("\x1b[2;3H##########################");
 			}
 	}
 
@@ -494,8 +479,7 @@ void jokoa01(int status)
 
 	//config
 	TekEtenBaimendu();
-	//ErlojuaMartxanJarri();
-    	etenZerbErrutEzarri();
+    etenZerbErrutEzarri();
 	DenbEtenBaimendu();	
 	konfiguratuTeklatua(0x400C);
 	konfiguratuTenporizadorea(65208,0x00C3);
@@ -503,21 +487,27 @@ void jokoa01(int status)
 	iprintf("\x1b[2;3H##########################");
 	iprintf("\x1b[4;3H          RUNNER          ");
 	iprintf("\x1b[6;3H##########################");
+	iprintf("\x1b[8;3H    J1 A    --  J2 B      ");
+	iprintf("\x1b[10;3H    J3 GORA --  J4 BEHERA ");
+	iprintf("\x1b[12;2H       SELECT PAUSA       ");
+	iprintf("\x1b[14;2H       START  MENUA       ");
+	iprintf("\x1b[16;3H##########################");
 
 
 	while(1){
-	    	//iprintf("\x1b[16;7HStatus = %d",status);
 		//Egoeren aldaketa
 		switch (status){
 
-			case 0:				
+			case 0:					
+				iprintf("\x1b[20;2H   Aukeratu jokalari kopurura   ");		
 				jokalariak();
 				break;
-			case 1:				
+			case 1:		
+				iprintf("\x1b[20;2H  Aukeratu jokoaren zailtasuna  ");							
 				zailtasuna();
-				//iprintf("\x1b[12;5HZailt: %d",zailt);
 				break;
 			case 2:
+				iprintf("\x1b[20;2H                                ");
 				if (jkop == 1)
 					jokoa1players();
 				if (jkop == 2)
@@ -529,9 +519,7 @@ void jokoa01(int status)
 				break;
 			case 3:
 				mark();
-				break;
-			case 9: //tests
-				break;		
+				break;	
 		}
 	 }
 
