@@ -19,12 +19,18 @@ int denb;
 int status = 0; //0 jokalariak, 1 zailtasuna, 2 jokoa, 3 mark
 int tekla=0;
 int jkop = 1; //jokalari kopurua
-int zailt = 1; //1 erraza, 2 normala, 3 zaila	
+int zailt = 1; //1 erraza, 2 normala, 3 zaila
+
+void mugimendu (int num,int x, int y) {
+	Ezabatusonic(num,x,y);
+        Erakutsisonic(num,x+1,y);
+}
 
 void jokalariak () {	
 		erakutsijokalariak();
 		
-		iprintf("\x1b[20;5HAukeratu jokalari kopurua");	//Fix Height
+		//iprintf("\x1b[20;5HAukeratu jokalari kopurua");
+		//iprintf("\x1b[20;5HAukeratu jokalari kopurua");	//Fix Height
 		delay(50);
 		touchRead(&PANT_DAT);
 
@@ -56,12 +62,12 @@ void jokalariak () {
 
 
 void zailtasuna () {
-		delay(80);
+		delay(800);
 		erakutsizailtasuna();
 		PANT_DAT.px = 0;
 		PANT_DAT.py = 0;
 
-		iprintf("\x1b[23;5HAukeratu zailtasuna"); //Fix Height
+		//iprintf("\x1b[23;5HAukeratu zailtasuna"); //Fix Height
 		
 		while (PANT_DAT.px == 0 && PANT_DAT.py == 0){
 			touchRead(&PANT_DAT);
@@ -96,52 +102,37 @@ void jokoa1players () {
 		int j1x = 5; //x pos of j1
 		static int j1y = 40; //y pos of j1
 
-		//J2
-		int j2 = 0; //finished(1) or not(0)
-		int j2x = 5; //x pos of j2
-		static int j2y = 68; //y pos of j2
-
-		//J3
-		int j3 = 0; //finished(1) or not(0)
-		int j3x = 5; //x pos of j3
-		static int j3y = 96; //y pos of j3
-
-		//J4
-		int j4 = 0; //finished(1) or not(0)
-		int j4x = 5; //x pos of j4
-		static int j4y = 124; //y pos of j4
-
 		erakutsijokoa();
 
 		//load sprites
 		Erakutsisonic(1,j1x,j1y);
-		Erakutsisonic(2,j2x,j2y);
-		Erakutsisonic(3,j3x,j3y);
-		Erakutsisonic(4,j4x,j4y);
+		Erakutsisonic(2,5,68);
+		Erakutsisonic(3,5,96);
+		Erakutsisonic(4,5,124);
 
-		while (j1 == 0 || j2 == 0 || j3 == 0 || j4 == 0) {
+		delay(2000);
+
+		tenpZerbErrutEzarri();	
+		while (j1 == 0) {
 			
-			if(SakatutakoTekla() == A){
-                		if(TeklaDetektatu() == pushA){
-                    			if (pushA == 1){
-                        			Ezabatusonic(1,j1x,40);
-                        			Erakutsisonic(1,j1x+1,40);
-                        			j1x = j1x+5;
-                       	 			pushA = 0;
-                        			if (j1x >= 220)					
-                        			{
-                            				iprintf("\x1b[10;5HPOS: %d",j1x);
-                            				Ezabatusonic(1,j1x,40);
-                            				j1 = 1;
-                            	
-                        			}
-                    			}
-                    			else
-                    			{
-                       				pushA = 1;
-                    			}
-                    	
-          		      	}	
+			
+			if(SakatutakoTekla() == A && TeklaDetektatu() == pushA){
+                    		if (pushA == 1){
+                        		Ezabatusonic(1,j1x,40);
+                        		Erakutsisonic(1,j1x+1,40);
+                        		j1x = j1x+5;
+                       	 		pushA = 0;
+                        		if (j1x >= 220)					
+                        		{
+                            			Ezabatusonic(1,j1x,40);
+                            			j1 = 1;                            	
+                        		}
+                    		}
+                    		else
+                    		{
+                       			pushA = 1;
+                    		}
+                    		
 			}			
 			//IA
 		}
@@ -352,6 +343,7 @@ void jokoa4players () {
 		int j1 = 0; //finished(1) or not(0)
 		int j1x = 5; //x pos of j1
 		static int j1y = 40; //y pos of j1
+		int j1time = 0;
 
 		//J2
 		int j2 = 0; //finished(1) or not(0)
@@ -375,6 +367,7 @@ void jokoa4players () {
 		Erakutsisonic(2,j2x,j2y);
 		Erakutsisonic(3,j3x,j3y);
 		Erakutsisonic(4,j4x,j4y);
+		
 
 		while (j1 == 0 || j2 == 0 || j3 == 0 || j4 == 0) {
 			
@@ -494,7 +487,8 @@ void jokoa4players () {
 			int time = 0;
 
 			while (x > time){
-				time++;
+				x--;				
+				iprintf("\x1b[15;7HEMPIEZZA %d ",x);
 			}
 	}
 
@@ -503,10 +497,9 @@ void jokoa01(int status)
 
 	//config
 	TekEtenBaimendu();
-	ErlojuaMartxanJarri();
+	//ErlojuaMartxanJarri();
     	etenZerbErrutEzarri();
-	DenbEtenBaimendu();
-	tenpZerbErrutEzarri();	
+	DenbEtenBaimendu();	
 	konfiguratuTeklatua(0x400C);
 	konfiguratuTenporizadorea(65208,0x00C3);
 
@@ -516,7 +509,7 @@ void jokoa01(int status)
 
 
 	while(1){
-	    //iprintf("\x1b[16;7HStatus = %d",status);
+	    	//iprintf("\x1b[16;7HStatus = %d",status);
 		//Egoeren aldaketa
 		switch (status){
 
@@ -525,7 +518,7 @@ void jokoa01(int status)
 				break;
 			case 1:				
 				zailtasuna();
-				iprintf("\x1b[12;5HZailt: %d",zailt);
+				//iprintf("\x1b[12;5HZailt: %d",zailt);
 				break;
 			case 2:
 				if (jkop == 1)
