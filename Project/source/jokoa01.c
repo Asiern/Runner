@@ -20,6 +20,8 @@ int status = 0; //0 jokalariak, 1 zailtasuna, 2 jokoa, 3 mark
 int tekla=0;
 int jkop = 1; //jokalari kopurua
 int zailt = 1; //1 erraza, 2 normala, 3 zaila
+int tik; //extern tik, zerbitzu errutinatik
+int denbora = 0;
 
 void mugimendu (int num,int x, int y) {
 	Ezabatusonic(num,x,y);
@@ -155,25 +157,16 @@ void jokoa2players () {
 		int j2x = 5; //x pos of j2
 		static int j2y = 68; //y pos of j2
 
-		//J3
-		int j3 = 0; //finished(1) or not(0)
-		int j3x = 5; //x pos of j3
-		static int j3y = 96; //y pos of j3
-
-		//J4
-		int j4 = 0; //finished(1) or not(0)
-		int j4x = 5; //x pos of j4
-		static int j4y = 124; //y pos of j4
-
 		erakutsijokoa();
 
 		//load sprites
 		Erakutsisonic(1,j1x,j1y);
 		Erakutsisonic(2,j2x,j2y);
-		Erakutsisonic(3,j3x,j3y);
-		Erakutsisonic(4,j4x,j4y);
+		Erakutsisonic(3,5,96);
+		Erakutsisonic(4,5,124);
 
-		while (j1 == 0 || j2 == 0 || j3 == 0 || j4 == 0) {
+		tenpZerbErrutEzarri();
+		while (j1 == 0 || j2 == 0) {
 			
 			if(SakatutakoTekla() == A){
                 		if(TeklaDetektatu() == pushA){
@@ -247,20 +240,17 @@ void jokoa3players () {
 		int j3x = 5; //x pos of j3
 		static int j3y = 96; //y pos of j3
 
-		//J4
-		int j4 = 0; //finished(1) or not(0)
-		int j4x = 5; //x pos of j4
-		static int j4y = 124; //y pos of j4
-
 		erakutsijokoa();
 
 		//load sprites
 		Erakutsisonic(1,j1x,j1y);
 		Erakutsisonic(2,j2x,j2y);
 		Erakutsisonic(3,j3x,j3y);
-		Erakutsisonic(4,j4x,j4y);
+		Erakutsisonic(4,5,124);
 
-		while (j1 == 0 || j2 == 0 || j3 == 0 || j4 == 0) {
+	
+		tenpZerbErrutEzarri();
+		while (j1 == 0 || j2 == 0 || j3 == 0) {
 			
 			if(SakatutakoTekla() == A){
                 		if(TeklaDetektatu() == pushA){
@@ -368,7 +358,7 @@ void jokoa4players () {
 		Erakutsisonic(3,j3x,j3y);
 		Erakutsisonic(4,j4x,j4y);
 		
-
+		tenpZerbErrutEzarri();
 		while (j1 == 0 || j2 == 0 || j3 == 0 || j4 == 0) {
 			
 			if(SakatutakoTekla() == A){
@@ -458,7 +448,7 @@ void jokoa4players () {
 	    		}
 			
 		}
-		
+		denbora = tik;
 		jokoa01(3); // Mark egoera
 		
 	}
@@ -467,10 +457,17 @@ void jokoa4players () {
 	
 
 	void mark () {
+		int sec = 0;
+		int dec = 0;
 		//erakutsizailtasuna();
 		iprintf("\x1b[5;7HRUNNER"); //Fix Height
-		int sec = 21;
-		int dec = 13;
+		while (denbora >= 100){
+			denbora = denbora - 100;
+			sec++;
+		}
+		dec = denbora;
+		
+		
 		iprintf("\x1b[10;7HJ1 -> %d s %d ms",sec,dec);
 		iprintf("\x1b[12;7HJ2 -> %d s %d ms",sec,dec);
 		iprintf("\x1b[14;7HJ3 -> %d s %d ms",sec,dec);

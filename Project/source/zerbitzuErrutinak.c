@@ -50,7 +50,7 @@ void tekEten ()
 
 void tenpEten()
 {	
-	static int tik=0;
+	//static int tik=0;
 	static int seg=0;
 	static int dec=0;
 	iprintf("\x1b[18;5HPa%d DECS:  %d",jkop,zailt);
